@@ -1,0 +1,1140 @@
+#This is a Sample Loot Table which would work as a ZombieSpawn PhatLoot
+#To get a better idea of how this PhatLoot is structured, use '/loot info SampleLoot' and '/loot SampleLoot' in game
+SampleLoot:
+  ==: PhatLoot
+  #If you wish to change the name of a LootTable, simply change the file name
+  Name: SampleLoot
+  #True if items should go straight to the Player's inventory
+  AutoLoot: false
+  #If any are negative then the PhatLoot will never reset
+  Reset:
+    Seconds: 0
+    Minutes: 0
+    Hours: 0
+    Days: 0
+  #This is used for daily/hourly/etc. PhatLoots
+  RoundDownTime: false
+  #True if everyone shares loot (allows for ninjaing)
+  Global: false
+  #Experience looted may be a range or both the same number
+  Exp:
+    Lower: 0
+    Upper: 0
+  #Money looted may be a range or both the same number
+  Money:
+    Lower: 0
+    Upper: 0
+  #Each Loot within this list will be rolled for
+  LootList:
+  #A LootCollection is a type of Loot that holds other Loot
+  - ==: LootCollection
+    #The LootCollection is referenced by its name (ex. cWeapon)
+    Name: Weapon
+    #This collection will be looted 100% of the time
+    Probability: 100.0
+    #1 Loot will be looted from the LootList below
+    LowerNumberOfLoots: 1
+    UpperNumberOfLoots: 1
+    LootList:
+    - ==: LootCollection
+      Name: DiamondWeapon
+      Probability: 1.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: Item
+        Probability: 40.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: DIAMOND_SWORD
+          #The meta field may be excluded where not applicable
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            #These are examples of tags, look at config.yml for more information
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        #This Item will automatically be enchanted in accordance with enchantments.yml
+        AutoEnchant: true
+        #This is used to allow for a range of amount (ex. enter 5 for 1-5 diamond swords)
+        BonusAmount: 0
+        #This is the same idea as amount but is used for durability
+        BonusDurability: 0
+        #This Item will automatically have a name generated in accordance with lores.yml
+        GenerateName: true
+        #This is an undocumented feature that I don't expect anyone (but myself) to ever use
+        RandomLore: false
+        #This Item will automatically have a tier added to its name in accordance with tiers.yml
+        Tiered: true
+      - ==: Item
+        Probability: 60.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: DIAMOND_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+    - ==: LootCollection
+      Name: IronWeapon
+      Probability: 9.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: Item
+        Probability: 40.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: IRON_SWORD
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+      - ==: Item
+        Probability: 60.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: IRON_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+    - ==: LootCollection
+      Name: GoldWeapon
+      Probability: 15.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: Item
+        Probability: 40.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: GOLD_SWORD
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+      - ==: Item
+        Probability: 60.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: GOLD_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+    - ==: LootCollection
+      Name: StoneWeapon
+      Probability: 25.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: Item
+        Probability: 40.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: STONE_SWORD
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+      - ==: Item
+        Probability: 60.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: STONE_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+    - ==: LootCollection
+      Name: WoodWeapon
+      Probability: 50.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: Item
+        Probability: 40.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: WOOD_SWORD
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+      - ==: Item
+        Probability: 60.0
+        ItemStack:
+          ==: org.bukkit.inventory.ItemStack
+          type: WOOD_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            lore:
+            - <dam>
+            - <holy>
+            - <fire>
+            - <bug>
+        AutoEnchant: true
+        BonusAmount: 0
+        BonusDurability: 0
+        GenerateName: true
+        RandomLore: false
+        Tiered: true
+  - ==: LootCollection
+    Name: Armor
+    Probability: 100.0
+    LowerNumberOfLoots: 1
+    UpperNumberOfLoots: 1
+    LootList:
+    - ==: LootCollection
+      Name: FullSet
+      Probability: 10.0
+      LowerNumberOfLoots: 1
+      UpperNumberOfLoots: 1
+      LootList:
+      - ==: LootCollection
+        Name: Diamond
+        Probability: 1.0
+        #The number of loots is 0 so each Loot is rolled for individually
+        LowerNumberOfLoots: 0
+        UpperNumberOfLoots: 0
+        LootList:
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Iron
+        Probability: 9.0
+        LowerNumberOfLoots: 0
+        UpperNumberOfLoots: 0
+        LootList:
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Gold
+        Probability: 15.0
+        LowerNumberOfLoots: 0
+        UpperNumberOfLoots: 0
+        LootList:
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Chain
+        Probability: 25.0
+        LowerNumberOfLoots: 0
+        UpperNumberOfLoots: 0
+        LootList:
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Leather
+        Probability: 50.0
+        LowerNumberOfLoots: 0
+        UpperNumberOfLoots: 0
+        LootList:
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 100.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+    - ==: LootCollection
+      Name: MixedSet
+      Probability: 90.0
+      #The number of loots is 0 so each Loot is rolled for individually
+      LowerNumberOfLoots: 0
+      UpperNumberOfLoots: 0
+      LootList:
+      - ==: LootCollection
+        Name: Helm
+        Probability: 100.0
+        LowerNumberOfLoots: 1
+        UpperNumberOfLoots: 1
+        LootList:
+        - ==: Item
+          Probability: 1.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 9.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 15.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 25.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 50.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_HELMET
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Plate
+        Probability: 100.0
+        LowerNumberOfLoots: 1
+        UpperNumberOfLoots: 1
+        LootList:
+        - ==: Item
+          Probability: 1.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 9.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 15.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 25.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 50.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Legs
+        Probability: 100.0
+        LowerNumberOfLoots: 1
+        UpperNumberOfLoots: 1
+        LootList:
+        - ==: Item
+          Probability: 1.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 9.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 15.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 25.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 50.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+      - ==: LootCollection
+        Name: Boots
+        Probability: 100.0
+        LowerNumberOfLoots: 1
+        UpperNumberOfLoots: 1
+        LootList:
+        - ==: Item
+          Probability: 1.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: DIAMOND_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 9.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 15.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: GOLD_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 25.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: CHAINMAIL_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true
+        - ==: Item
+          Probability: 50.0
+          ItemStack:
+            ==: org.bukkit.inventory.ItemStack
+            type: LEATHER_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              lore:
+              - <def>
+              - <rangedef>
+              - <firedef>
+              - <blastdef>
+              - <falldef>
+          AutoEnchant: true
+          BonusAmount: 0
+          BonusDurability: 0
+          GenerateName: true
+          RandomLore: false
+          Tiered: true

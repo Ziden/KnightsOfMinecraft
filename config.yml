@@ -1,0 +1,291 @@
+##Config file for PhatLoots
+##Plugin made by Codisimus
+
+
+################## Linkables #################
+
+##You may disable any of these features by setting them to false
+##You should disable all of these that you will not be using
+
+##Using LootBags may cause lag if you have many items with a lot of lore on the server
+LootBags: false
+##If using LootBags, there is a security threat if players on your server are able to modify the lore of an item
+##In that case, you should change this key to something else (such as &3&8&4&r&0) and keep it secret
+LootBagKey: '&r&0'
+
+##Using Dispensers may cause significant lag if you have a decent amount of redstone circuts on the server
+##This also applies to Droppers
+DispenserLoot: true
+
+##Using MobLoot may cause significant lag if there are numerous mobs on the server
+##e.g. Zombie, Creeper, Skeleton, Spider, Player
+MobDropLoot: true
+##e.g. ZombieSpawn, SkeletonSpawn, VillagerSpawn
+MobSpawnLoot: true
+
+##World Mob Loots should be disabled if you only have one World
+##e.g. Zombie@MainWorld, Zombie@DungeonWorld
+WorldMobDropLoot: true
+##e.g. ZombieSpawn@MainWorld, ZombieSpawn@DungeonWorld
+WorldMobSpawnLoot: true
+
+##Region Mob Loots are automatically disabled if RegionOwn or WorldGuard is not installed
+##e.g. Zombie@Graveyard, Spider@Nest
+RegionMobDropLoot: true
+RegionMobSpawnLoot: true
+
+##Mob Types should be enabled if you want to distinguish between different types of Zombies, Skeletons, Villagers, etc.
+##e.g. BabyZombie, WitherSkeleton, PriestVillager
+MobTypes: true
+
+##Named Mobs should be enabled if you want to have mobs drop loot based on their name
+##e.g. ZombieBoss, Skeletor, Paul the Priest
+NamedMobs: true
+
+##Fishing Loot should be enabled to modify what Players can fish out of the water
+##e.g. Fishing
+FishingLoot: true
+
+##Votifier Loot should be enabled to modify give Players loot whenever they Vote (Powered by Votifier)
+##The Vote PhatLoot should be set to autoloot and give little loot to not cause issues with numerous votes at once
+##e.g. Vote
+VotifierLoot: false
+
+##Only Block Materials that are listed below will be able to be linked
+##Removing unused materials from this list will help reduce the use of uneeded resources
+Blocks:
+    - Chest
+    - Trapped Chest
+    - Ender Chest
+    - Dispenser
+    - Dropper
+    - Bookshelf
+
+##Every block in the specified Worlds that matches a listed Material will be linked to the given PhatLoot
+##Blocks listed here need not be listed in 'Blocks' above
+##I have commented out these default settings because noone bothers to read and replace them
+##In order to set this feature you must remove the empty square brackets []
+AutoLink: []
+#    all:
+#        Melon Block: melons
+#    world:
+#        Bookshelf: books
+
+
+
+################## MOB LOOTS #################
+
+##If set to true then the items normally dropped by mobs will vanish
+##If set to false then Mob PhatLoot items will be in addition to the normally dropped loot
+##In either case, a mob's loot will not be affected if it doesn't have a PhatLoot file
+ReplaceMobLoot: true
+
+
+##If set to true then Mobs will not drop any items/exp unless they are killed by a Player
+OnlyDropLootWhenKilledByPlayer: false
+OnlyDropExpWhenKilledByPlayer: false
+
+
+##If Mobs spawn with items through this plugin, this is the chance that the item will be dropped (0 - 100)
+MobLootDropPercentage: 20
+
+
+##This setting is used when a weapon has the Looting enchantment
+##Each level will give an extra percentage chance when rolling for loots
+##e.g. LootingBonusPerLevel = 5
+##     Zombies drop 1 rotten flesh 50% of the time
+##     A zombie is killed with a sword that has Looting IV
+##     1 rotten flesh would then be dropped at a 70% chance
+##     50% + (5% x 4 levels)
+LootingBonusPerLevel: 5
+
+##Supported Region plugins include WorldGuard and RegionTools
+##If set to auto, the first compatible plugin will be used
+##You only need to change this setting if you have multiple Region plugins installed
+RegionPlugin: auto
+##This setting is only used for plugins which allow grouped Regions (Such as RegionTools)
+RegionGroup:
+
+
+
+############### FEATURE FLAGS ################
+
+#When looting, if a Player has one of the specified permissions,
+#then they will have an increased probability of looting better/more items
+#Permission based bonuses stack with each other and on top of existing bonuses 
+#Enter comma delimited numbers between the brackets to register those nodes
+#i.e. with [10, 20, 0.5] a Player with the node phatloots.bonus.10 will
+#have 10 added to each of their rolls resulting in rarer loot
+LootBonusPermissions: []
+
+
+
+################## MESSAGES ##################
+
+##These are the messages that Players will see while using PhatLoots
+##Blank messages will not be shown
+##Use & to specify colors for messages (ex. &3hi&a.)
+##<time> will be replaced by the amount of time remaining
+##<item> will be replaced by the name of the item
+##<amount> will be replaced by the amount of money/experience/items
+Messages:
+    Permission: '&4You do not have permission to do that.'
+    ExperienceLooted: '&5You gained &6<amount>&5 experience from looting the chest.'
+    MoneyLooted: '&5You looted &6<amount>&5 from the chest.'
+    MoneyCharged: '&5You have been charged &6<amount>&5 to loot the chest.'
+    InsufficientFunds: '&4You must have &6<amount>&4 to loot the chest.'
+    AutoLoot: '&5You looted &6<item>&5 from the chest.'
+    Overflow: '&5The Chest is overflowing with loot!'
+    ChestTimeRemaining: '&4You must wait &6<time>&4 to receive more loot!'
+    EmptyChestTimeRemaining: '&4You must wait &6<time>&4 to receive more loot!'
+    CommandTimeRemaining: '&4You must wait &6<time>&4 to receive more loot!'
+    DispenserTimeRemaining: ''
+    MobTimeRemaining: '&4You must wait &6<time>&4 to receive more loot!'
+    MobDroppedMoney: '&5You loot &6<amount>.'
+    MobDroppedItem: ''
+    MobDroppedExperience: ''
+    LootMessage: ''
+    LootBroadcast: ''
+
+##PhatLoot Chests will display this name at the top of the Chest GUI
+##<name> will be replaced with the name of the linked PhatLoot
+ChestName: '&6<name>'
+
+#Damage estimates (as ranges) may be added to the lore of loot
+#Do so by making a line of lore one of the following tags
+UseDamageTags: true
+<dam>: '&5<amount> damage'
+<holy>: '&6+<amount> holy damage'
+<fire>: '&4+<amount> fire'
+<bug>: '&2+<amount> bug repellent'
+<thorns>: '&8<chance>% chance of 1-4 damage'
+<def>: '&5<amount> defense'
+<firedef>: '&4+<amount> fire defense'
+<rangedef>: '&2+<amount> range defense'
+<blastdef>: '&1+<amount> explosion defense'
+<falldef>: '&b+<amount> fall defense'
+
+##If using MythicDrops, UnidentifiedItems display their Tier in the lore
+##By default, this text will be black to somewhat hide it
+##You can set the color below if you wish to make it more or less visible
+##Multiple color codes are valid such as '&k&0' or '&l&n&d'
+MythicDropsTierColor: '&0'
+
+
+################## DEFAULTS ##################
+
+##Each new PhatLoot will have the following settings by default
+##Each of these settings can be changed per PhatLoot after they are made
+Defaults:
+    ##Amount of time before the PhatLoot is lootable again
+    ##Change Days to -1 in order for it to never reset
+    ResetTime:
+        Days: 1
+        Hours: 0
+        Minutes: 0
+        Seconds: 0
+
+
+    ##If set to true, items will go straight to the looter's inventory
+    ##Once their inventory is full, items will show up in the chest
+    AutoLoot: false
+
+
+    ##If set to true, when looted by one person, everyone must wait to loot it again (first person there gets the loot)
+    ##If set to false, when a player loots a Chest only they must wait the specified time to loot again (everyone can have their share of loot)
+    GlobalReset: false
+
+
+    ##If set to true, when a global chest is looted, it will disappear and respawn when it may be looted again (or when the server is shutdown)
+    #'UseBreakAndRespawn' must be set to true below in order for this to have any effect
+    BreakAndRespawn: false
+
+
+    ##If set to true, loot times will be rounded down to 0
+    ##This is good if doing Daily or Hourly loots
+    ##e.g.
+    ##If ResetTime = 1 Day, 0 Hours, 0 Minutes, and 0 Seconds
+    ##   RoundDownTime = true
+    ##   Player loots at Day 100, Hour 20, Minute 37, and Second 49
+    ##   Values that are 0 in the ResetTime are rounded down
+    ##   The loot time is set to Day 100, Hour 0, Minute 0, and Second 0
+    ##   This way, the Player can loot the next day even if it is not 24 hours later
+    ##If ResetTime = 0 Day, 0 Hours, 5 Minutes, and 0 Seconds
+    ##   then only the Seconds value is rounded down (not values to the left of Minutes)
+    RoundDownTime: false
+
+
+    ##The number of items that will be received from the loot collections (if not specified)
+    ##An amount of 0 will mean that each loot within the collection is rolled for individually
+    ItemsPerColl: 1
+
+
+
+################### OTHER ####################
+
+##Players need permission to use restricted PhatLoots
+##'phatloots.loot.Epic' or 'phatloots.loot.*' would be needed to loot Epic if it is restricted
+##You can add as many PhatLoots to this list as you want, just be sure to use spaces instead of tabs
+RestrictAll: false
+RestrictedPhatLoots:
+    - 'PhatLoot1'
+    - 'PhatLoot2'
+    - 'PhatLoot3'
+#    - 'Rare'
+#    - 'Epic'
+#    - 'Donator'
+
+
+##Whenever an Item is generated that has a Tier above this number it will be logged
+MinimumTierNotification: 100
+
+
+##This setting is only used if you have the plugin ChestLock
+##If set to true then PhatLoot Chests will be automatically set as unlockable
+SetChestsAsUnlockable: true
+
+
+##Set this to true if you want to use decimals for your money
+##This would turn a range of 100-1275 to 1.00-12.75
+DivideMoneyAmountBy100: false
+
+
+PlaySoundOnAutoLoot: true
+
+PlaySoundOnChestBreak: true
+
+UseBreakAndRespawn: true
+
+
+#If set to true, Loot will be scattered throughout the Chest rather than all in the top left corner
+ShuffleLoot: false
+
+
+#If set to true, Collections which give more than 1 item have a chance to spawn a specific item more than once
+AllowDuplicateItemsFromCollections: true
+
+
+##This is how long (in seconds) each inventory will be kept in memory
+##Items that have not been looted before the inventory is forgotten will be lost
+ForgetInventoryTime: 60
+
+
+##Set to true if global chests that never reset should be unlinked after looting
+UnlinkGlobalChestsThatNeverReset: false
+
+
+##Set to true if '/loot give' and '/loot <PhatLoot>' should have cooldowns
+ApplyCooldownToCommandLoot: false
+
+
+##This is how often (in minutes) the plugin will automatically save the loot times
+##If set to 0, Loot times will only be saved when the server is shut down
+##This only needs to be set if you worry about losing data in the case of a server crash
+AutoSavePeriod: 1440
+
+
+##This setting will only affect PhatLootChests which are set to GlobalReset and BreakAndRespawn
+##If set to true then a Player may punch a chest (single hit) to break it
+##The loot will spill all over the ground near the chests location
+##This will only apply if BreakAndRespawn=true, and GlobalReset=true
+AutoBreakOnPunch: false

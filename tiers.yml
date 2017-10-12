@@ -1,0 +1,162 @@
+TIERS:
+    200:
+        Prefix: '§5'
+        Suffix: ' (Legendary)'
+    150:
+        Prefix: '§4'
+        Suffix: ' (Mythic)'
+    100:
+        Prefix: '§2'
+        Suffix: ' (Epic)'
+    80:
+        Prefix: '§1'
+        Suffix: ' (Ultra Rare)'
+    65:
+        Prefix: '§9'
+        Suffix: ' (Super Rare)'
+    50:
+        Prefix: '§3'
+        Suffix: ' (Very Rare)'
+    30:
+        Prefix: '§b'
+        Suffix: ' (Rare)'
+    20:
+        Prefix: '§f'
+        Suffix: ' (Uncommon)'
+    5:
+        Prefix: '§7'
+        Suffix: ' (Common)'
+    0:
+        Prefix: '§8'
+        Suffix: ' (Poor)'
+
+BaseValues:
+    DIAMOND_SWORD: 30
+    DIAMOND_AXE: 30
+    DIAMOND_HELMET: 30
+    DIAMOND_CHESTPLATE: 30
+    DIAMOND_LEGGINGS: 30
+    DIAMOND_BOOTS: 30
+    IRON_SWORD: 20
+    IRON_AXE: 20
+    IRON_HELMET: 20
+    IRON_CHESTPLATE: 20
+    IRON_LEGGINGS: 20
+    IRON_BOOTS: 20
+    GOLD_SWORD: 20
+    GOLD_AXE: 20
+    GOLD_HELMET: 20
+    GOLD_CHESTPLATE: 20
+    GOLD_LEGGINGS: 20
+    GOLD_BOOTS: 20
+    STONE_SWORD: 10
+    STONE_AXE: 10
+    CHAINMAIL_HELMET: 10
+    CHAINMAIL_CHESTPLATE: 10
+    CHAINMAIL_LEGGINGS: 10
+    CHAINMAIL_BOOTS: 10
+    WOOD_SWORD: 0
+    WOOD_AXE: 0
+    LEATHER_HELMET: 0
+    LEATHER_CHESTPLATE: 0
+    LEATHER_LEGGINGS: 0
+    LEATHER_BOOTS: 0
+    BOW: 20
+    OTHER: 0
+
+EnchantmentValues:
+    PROTECTION_ENVIRONMENTAL:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+    PROTECTION_FIRE:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+    PROTECTION_EXPLOSIONS:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+    PROTECTION_PROJECTILE:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+    THORNS:
+        1: 5
+        2: 10
+        3: 15
+    OXYGEN:
+        1: 5
+        2: 10
+        3: 15
+    WATER_WORKER:
+        1: 5
+    DURABILITY:
+        1: 5
+        2: 10
+        3: 15
+    DAMAGE_ALL:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+        5: 25
+    DAMAGE_UNDEAD:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+        5: 25
+    DAMAGE_ARTHROPODS:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+        5: 25
+    KNOCKBACK:
+        1: 5
+        2: 10
+    FIRE_ASPECT:
+        1: 5
+        2: 10
+    LOOT_BONUS_MOBS:
+        1: 5
+        2: 10
+        3: 15
+    LOOT_BONUS_BLOCKS:
+        1: 5
+        2: 10
+        3: 15
+    ARROW_DAMAGE:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+        5: 25
+    ARROW_KNOCKBACK:
+        1: 5
+        2: 10
+    ARROW_FIRE:
+        1: 5
+    ARROW_INFINITE:
+        1: 5
+    DIG_SPEED:
+        1: 5
+        2: 10
+        3: 15
+        4: 20
+        5: 25
+    SILK_TOUCH:
+        1: 5
+    LUCK:
+        1: 5
+        2: 10
+        3: 15
+    LURE:
+        1: 5
+        2: 10
+        3: 15

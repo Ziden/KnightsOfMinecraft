@@ -1,0 +1,89 @@
+name: Kom
+version: 5
+main: nativelevel.KoM
+depend: [SimpleClans]
+commands:
+    gm:
+    ops:
+    komq:
+    pvpm:
+    anuncio:
+    verexp:
+    dislike:
+    fechar:
+    komlib:
+    foguete:
+    hat:
+    dartitulo:
+    gemas:
+    limpamobs:
+    gerador:
+    setarbloco:
+    teleportar:
+    like:
+    loot:
+    ajudantes:
+    ajuda:
+    responder:
+    pergunta:
+    perguntas:
+    anunciar:
+    genero:
+    titulo:
+    setpreco:
+    darxp:
+    falar:
+    reinicio:
+    g:
+    kom:
+        description: Comando KoM
+        usage: /kom
+    lobby:
+        alias: hub
+    terreno:
+        description: Comando Terrenos
+        usage: /terreno
+    towers:
+        aliases: [tow]
+        description: Comando Torrers
+        usage: /towers
+    guilda:
+        description: Comando Guildas
+        usage: /guilda
+    f:
+        description: Comando Guildas
+        usage: /f
+    spawn:
+        description: Comando Spawn
+        usage: /spawn
+    customitem:
+        description: Comando Item Customizado
+        usage: /customitem
+    recompensa:
+        description: Comando Recompensas
+        usage: /recompensa
+    kompaste:
+        description: Comando de paste maroto
+        usage: /kompaste
+    consoleitem:
+        description: Givar consoleitem
+        usage: /consoleitem
+    voteshop:
+        description: Loja de votecoins
+        usage: /voteshop
+    score:
+        description: Remover Score        
+    limpaitem:
+        description: Limpa Item
+    arena:
+        description: Limpa Item
+    doar:
+        description: Limpa Item
+    lobo:
+        description: Limpa Item
+    msgraio:
+        description: Limpa Item
+    tpraio:
+        description: Limpa Item
+    msgzinha:
+        description: Limpa Item

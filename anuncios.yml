@@ -1,0 +1,26 @@
+# 
+# AutoAnnouncer Settings by Sharkiller #
+Settings:
+  Interval: 5
+  InSeconds: false
+  Random: false
+  Permission: false
+Announcer:
+  Tag: '&GOLD;[Berrante da Montanha]'
+  ToGroups: false
+  Groups:
+  - Default
+  Strings:
+  - '&2O porto de Rhodes fica atraz de uma cadeia de montanhas.Pegue o barco para ir a locais para explorar e construir !'
+  - '&2Use o comando /kom para ver os comandos disponiveis !'
+  - '&2KoM, agente se ve por aqui !'
+  - '&2Dungeons estao escondidas pelo vasto mapa ! Procure-as !'
+  - '&2Existem muitas coisas secretas como baus, dungeons e lojas !'
+  - '&2Por mais dificil que pareca, nunca desista bravo aventureiro! !'
+  - '&2Nao faca guildas 100% fechadas, e muros de ate 10 blocos de altura apenas !'     
+  - '&2Eh proibido construir na agua ! Por que castelos nao boiam !(se for um barco muito bonito pode)' 
+  - '&2Ladinagem, roubos, furtos, espionagem, trairagem sao permitidos no servidor !!' 
+  - '&2Quanto mais longe das cidades voce esta, mais forte ficam os mobs !!'
+  - '&2Perdeu sua espada sagrada do dragao alado do alasca ? Sinto muito ! Staff nao recupera items !!'  
+  - '&2Aventure-se ! Explore o vasto mundo !!' 
+  - '&2Meu berrante eh tao alto que todos continentes podem escutar !!' 

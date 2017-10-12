@@ -1,0 +1,13 @@
+messages:
+  events:
+    unable-to-use-level: "&CYou are unable to use %itemname% until you are level %level%."
+    unable-to-use-permission: "&CYou cannot use %itemname% as you do not have the right permissions."
+    critical-hit: "&AYou scored a critical hit and dealt %percentage%% of your normal damage!"
+    stun: "&AYou have stunned your opponent!"
+    dodge: "&AYou dodged an attack!"
+  commands:
+    cannot-use: "&CYou cannot use that command."
+    view-stats-help: "&7Stat Name &8- &FTotal &8| &9(Helmet) &A(Chestplate) &B(Leggings) &C(Boots) &D(Item in Hand)"
+    view-stats: "&7%statname% &8- &F%totalvalue% &8| &9(%helmet%) &A(%chestplate%) &B(%leggings%) &C(%boots%) &D(%item%)"
+    view-stats-percentage: "&7%statname% &8- &F%totalvalue%% &8| &9(%helmet%%) &A(%chestplate%%) &B(%leggings%%) &C(%boots%%) &D(%item%%)"
+version: "1.0.6"

@@ -1,0 +1,150 @@
+ARMOR:
+    PROTECTION_ENVIRONMENTAL:
+        1: of the Ox
+        2: of the Gorilla
+        3: of the Rhino
+        4: of the Elephant
+    PROTECTION_FIRE:
+        1: Fire Resistant
+        2: Fire Resistant
+        3: Fire Retardant
+        4: Fire Proof
+    PROTECTION_EXPLOSIONS:
+        1: of the Crab
+        2: of the Clam
+        3: of the Shark
+        4: of the Whale
+    PROTECTION_PROJECTILE:
+        1: of the Snail
+        2: of the Turtle
+        3: of the Alligator
+        4: of the Armadillo
+    THORNS:
+        1: Spiny
+        2: Spiky
+        3: Thorny
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified
+
+SWORD:
+    DAMAGE_ALL:
+        0: Shortsword
+        1: Broadsword
+        3: Longsword
+        4: Scimitar
+        5: Claymore
+    DAMAGE_UNDEAD:
+        1: Sprinkled with Holy Water
+        2: Dipped in Holy Water
+        3: Dripping with Holy Water
+        4: Soaked with Holy Water
+        5: Drenched with Holy Water
+    DAMAGE_ARTHROPODS:
+        0: Shortsword
+        1: Spider Killer
+        2: Spider Slayer
+        3: Spider Vanquisher
+        4: Spider Demolisher
+        5: Spider Annihilator
+    KNOCKBACK:
+        1: with a Kick
+        2: with a Punch
+    FIRE_ASPECT:
+        1: Firey
+        2: Blazing
+    LOOT_BONUS_MOBS:
+        1: of the Bandit
+        2: of the Thief
+        3: of the Looter
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified
+
+AXE:
+    DAMAGE_ALL:
+        0: Hatchet
+        1: Hatchet
+        3: Greataxe
+        4: Choppa
+        5: Waraxe
+    DAMAGE_UNDEAD:
+        1: Sprinkled with Holy Water
+        2: Dipped in Holy Water
+        3: Dripping with Holy Water
+        4: Soaked with Holy Water
+        5: Drenched with Holy Water
+    DAMAGE_ARTHROPODS:
+        0: Hatchet
+        1: Spider Killer
+        2: Spider Slayer
+        3: Spider Vanquisher
+        4: Spider Demolisher
+        5: Spider Annihilator
+    KNOCKBACK:
+        1: with a Kick
+        2: with a Punch
+    FIRE_ASPECT:
+        1: Firey
+        2: Blazing
+    LOOT_BONUS_MOBS:
+        1: of the Bandit
+        2: of the Thief
+        3: of the Looter
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified
+
+BOW:
+    ARROW_DAMAGE:
+        0: Shortbow
+        3: Longbow
+        4: Recurvebow
+        5: Compoundbow
+    ARROW_KNOCKBACK:
+        1: with a Kick
+        2: with a Punch
+    ARROW_FIRE:
+        1: Flaming
+    ARROW_INFINITE:
+        1: of the Magician
+    DURABILITY:
+        0: Oak
+        1: Spruce
+        2: Birch
+        3: Ironwood
+
+PICKAXE:
+    DIG_SPEED:
+        0: Piolet
+        1: Pick
+        2: Pickaxe
+        3: Mattock
+        4: Drill
+        5: GigaDrill
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified
+
+SPADE:
+    DIG_SPEED:
+        0: Spoon
+        1: Trowel
+        2: Shovel
+        3: Spade
+        4: Excavator
+        5: Super Excavator
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified
+
+HOE:
+    DURABILITY:
+        1: Sturdy
+        2: Reinforced
+        3: Fortified

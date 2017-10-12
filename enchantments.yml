@@ -1,0 +1,176 @@
+ARMOR:
+    PROTECTION_ENVIRONMENTAL:
+        0: 80
+        1: 10
+        2: 5
+        3: 4
+        4: 1
+    PROTECTION_FIRE:
+        0: 80
+        1: 10
+        2: 5
+        3: 4
+        4: 1
+    PROTECTION_EXPLOSIONS:
+        0: 80
+        1: 10
+        2: 5
+        3: 4
+        4: 1
+    PROTECTION_PROJECTILE:
+        0: 80
+        1: 10
+        2: 5
+        3: 4
+        4: 1
+    THORNS:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+SWORD:
+    DAMAGE_ALL:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DAMAGE_UNDEAD:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DAMAGE_ARTHROPODS:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    KNOCKBACK:
+        0: 95
+        1: 4
+        2: 1
+    FIRE_ASPECT:
+        0: 95
+        1: 4
+        2: 1
+    LOOT_BONUS_MOBS:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+AXE:
+    DAMAGE_ALL:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DAMAGE_UNDEAD:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DAMAGE_ARTHROPODS:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    KNOCKBACK:
+        0: 95
+        1: 4
+        2: 1
+    FIRE_ASPECT:
+        0: 95
+        1: 4
+        2: 1
+    LOOT_BONUS_MOBS:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+BOW:
+    ARROW_DAMAGE:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    ARROW_KNOCKBACK:
+        0: 95
+        1: 4
+        2: 1
+    ARROW_FIRE:
+        0: 99
+        1: 1
+    ARROW_INFINITE:
+        0: 99
+        1: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+PICKAXE:
+    DIG_SPEED:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+SPADE:
+    DIG_SPEED:
+        0: 80
+        1: 10
+        2: 4
+        3: 3
+        4: 2
+        5: 1
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
+
+HOE:
+    DURABILITY:
+        0: 90
+        1: 5
+        2: 4
+        3: 1
