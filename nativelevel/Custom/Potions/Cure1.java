@@ -53,7 +53,7 @@ public class Cure1 extends CustomPotion {
         return new ItemStack[]{
             new ItemStack(Material.LEAVES, 1),
             new ItemStack(Material.WHEAT, 1),
-            new ItemStack(Material.APPLE, 1)};
+            new ItemStack(Material.SAND, 1)};
     }
 
     @Override

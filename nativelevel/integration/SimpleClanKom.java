@@ -341,6 +341,12 @@ public class SimpleClanKom {
                 return false;
             }
 
+            ClanPlayer cp = ClanLand.manager.getClanPlayer(p);
+            if (Terreno.temGuildaPerto( cp, b.getLocation())) {
+                p.sendMessage(L.m("Voce está muito próximo de outra guilda para mexer nesta terra !"));
+                return false;
+            }
+
             Block gambs = l.getChunk().getBlock(5, 0, 5);
             if (gambs.getType() == GeneralListener.gambiarra) {
                 l.getChunk().getBlock(5, 0, 5).setType(Material.GLOWSTONE);
@@ -356,11 +362,7 @@ public class SimpleClanKom {
             if (l.getBlockY() < 50) {
                 return true;
             }
-            ClanPlayer cp = ClanLand.manager.getClanPlayer(p);
-            if (Terreno.temGuildaPerto(p, cp, b.getLocation())) {
-                p.sendMessage(L.m("Voce está muito próximo de outra guilda para mexer nesta terra !"));
-                return false;
-            }
+
             return true;
             /*
              if (l.getBlockY() > 50) { 

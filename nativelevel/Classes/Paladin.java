@@ -56,7 +56,7 @@ public class Paladin {
     //  ლ(ಠ益ಠლ) paladinos...odeia....magos... !!!
 
     public static void swordHit(EntityDamageByEntityEvent event, Player bateu) {
-     
+
     }
 
     public static void usaAnk(EntityDamageEvent ev, Player p) {
@@ -132,56 +132,58 @@ public class Paladin {
         if (level == 1) // primaria
         {
             rnd = 10;
-       
-            if (p.getItemInHand().getType() == Material.IRON_DOOR && p.getLocation().getBlock().getType() == Material.WEB) {
-                p.sendMessage(ChatColor.RED + "Voce nao conseguiu bloquear o ataque por estar preso em teias");
-            } else {
-                if (p.getItemInHand().getType() == Material.IRON_DOOR && (ev.getCause() == DamageCause.ENTITY_ATTACK || ev.getCause() == DamageCause.CONTACT || ev.getCause() == DamageCause.PROJECTILE)) {
-                    Entity causador = null;
-                    if (ev instanceof EntityDamageByEntityEvent) {
-                        causador = ((EntityDamageByEntityEvent) ev).getDamager();
-                        Vector chave = causador.getLocation().getDirection();
-                        if (ev.getCause() == DamageCause.PROJECTILE) {
-                            chave = causador.getVelocity();
-                            chave.setY(1);
-                            chave = chave.normalize();
-                        }
-                        double angle = Tralhas.getAngle(p.getLocation().getDirection(), chave);
-                        if (KoM.debugMode) {
-                            KoM.log.info("Angle: " + angle);
-                        }
-                        if (angle < 50) {
-                            p.sendMessage(ChatColor.RED + "Voce tem que estar de frente para poder bloquear o ataque !");
-                            return;
-                        }
-                    }
-                    int mana = 30;
-                    if (PlayerSpec.temSpec(p, PlayerSpec.Guardiao)) {
-                        mana = 10;
-                    } else if (PlayerSpec.temSpec(p, PlayerSpec.Crusador)) {
-                        mana = 60;
-                    }
-                    if (Mana.spendMana(p, mana)) {
-                        p.sendMessage(ChatColor.GOLD + "Voce bloqueou o ataque");
-                        PlayEffect.play(VisualEffect.FIREWORKS_SPARK, p.getLocation(), "num:10");
-                        PlayEffect.play(VisualEffect.SOUND, p.getLocation(), "type:zombie_metal");
-                        ev.setDamage(0f);
-                        ev.setCancelled(true);
-                        p.setNoDamageTicks(20);
-                        if(ev instanceof EntityDamageByEntityEvent) {
-                            EntityDamageByEntityEvent ev2 = (EntityDamageByEntityEvent)ev;
-                            if(ev2.getDamager().getType()==EntityType.PLAYER) {
-                                Player bateu = (Player) ev2.getDamager();
-                                if(Thief.taInvisivel(bateu))
-                                    Thief.revela(bateu);
-                            }
-                        }
-                    }
-                    return;
-                }
-            }
-                
 
+            // BLOQUEIO COM PORTA (retirado)
+            /*
+             if (p.getItemInHand().getType() == Material.IRON_DOOR && p.getLocation().getBlock().getType() == Material.WEB) {
+             p.sendMessage(ChatColor.RED + "Voce nao conseguiu bloquear o ataque por estar preso em teias");
+             } else {
+             if (p.getItemInHand().getType() == Material.IRON_DOOR && (ev.getCause() == DamageCause.ENTITY_ATTACK || ev.getCause() == DamageCause.CONTACT || ev.getCause() == DamageCause.PROJECTILE)) {
+             Entity causador = null;
+             if (ev instanceof EntityDamageByEntityEvent) {
+             causador = ((EntityDamageByEntityEvent) ev).getDamager();
+             Vector chave = causador.getLocation().getDirection();
+             if (ev.getCause() == DamageCause.PROJECTILE) {
+             chave = causador.getVelocity();
+             chave.setY(1);
+             chave = chave.normalize();
+             }
+             double angle = Tralhas.getAngle(p.getLocation().getDirection(), chave);
+             if (KoM.debugMode) {
+             KoM.log.info("Angle: " + angle);
+             }
+             if (angle < 50) {
+             p.sendMessage(ChatColor.RED + "Voce tem que estar de frente para poder bloquear o ataque !");
+             return;
+             }
+             }
+             int mana = 30;
+             if (PlayerSpec.temSpec(p, PlayerSpec.Guardiao)) {
+             mana = 10;
+             } else if (PlayerSpec.temSpec(p, PlayerSpec.Crusador)) {
+             mana = 60;
+             }
+             if (Mana.spendMana(p, mana)) {
+             p.sendMessage(ChatColor.GOLD + "Voce bloqueou o ataque");
+             PlayEffect.play(VisualEffect.FIREWORKS_SPARK, p.getLocation(), "num:10");
+             PlayEffect.play(VisualEffect.SOUND, p.getLocation(), "type:zombie_metal");
+             ev.setDamage(0f);
+             ev.setCancelled(true);
+             p.setNoDamageTicks(20);
+             if(ev instanceof EntityDamageByEntityEvent) {
+             EntityDamageByEntityEvent ev2 = (EntityDamageByEntityEvent)ev;
+             if(ev2.getDamager().getType()==EntityType.PLAYER) {
+             Player bateu = (Player) ev2.getDamager();
+             if(Thief.taInvisivel(bateu))
+             Thief.revela(bateu);
+             }
+             }
+             }
+             return;
+             }
+                   
+             }
+             */
         }
         if (level == 2) {
             rnd = 50;

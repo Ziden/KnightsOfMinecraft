@@ -85,7 +85,7 @@ public class MarketItem {
                         listalore.remove(inf);
                     } else if (ChatColor.stripColor(inf).toLowerCase().contains(L.m("- moedas -"))) {
                         listalore.remove(inf);
-                    }  else if (ChatColor.stripColor(inf).toLowerCase().contains(MarketItem.CASH_STR.toLowerCase())) {
+                    }  else if (ChatColor.stripColor(inf).toLowerCase().contains(" cash ")) {
                         listalore.remove(inf);
                     }
                 }

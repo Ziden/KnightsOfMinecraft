@@ -918,7 +918,13 @@ public class GeneralListener implements Listener {
             String type = ClanLand.getTypeAt(ev.getChunk().getBlock(0, 0, 0).getLocation());
             if (type.equalsIgnoreCase("WILD")) {
                 //ClanLand.removeClanAt(ev.getChunk().getBlock(0, 0, 0).getLocation());
-                ev.getChunk().getWorld().regenerateChunk(ev.getChunk().getX(), ev.getChunk().getZ());
+        
+                boolean guildaProxima = Terreno.temGuildaPerto(null, ev.getChunk().getBlock(0, 0, 0).getLocation());
+                
+                if(!guildaProxima) {
+                    ev.getChunk().getWorld().regenerateChunk(ev.getChunk().getX(), ev.getChunk().getZ());
+                }
+
                 ev.getChunk().getBlock(5, 0, 5).setType(gambiarra);
                 ev.getChunk().getBlock(5, 1, 5).setType(Material.BEDROCK);
             } else {

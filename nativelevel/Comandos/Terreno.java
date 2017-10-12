@@ -56,56 +56,61 @@ public class Terreno implements CommandExecutor {
         }
     }
 
-    public static boolean temGuildaPerto(Player p, ClanPlayer c, Location l) {
+    public static boolean temGuildaPerto(ClanPlayer c, Location l) {
         String minhaTag = "asdasdasdasd";
-        if(c!=null)
+        if (c != null) {
             minhaTag = c.getTag();
-        int x = p.getLocation().getChunk().getBlock(1, 0, 1).getLocation().getBlockX();
-        int y = p.getLocation().getChunk().getBlock(1, 0, 1).getLocation().getBlockZ();
-        Location up = new Location(p.getWorld(), x + 16, 0, y);
+        } else {
+            minhaTag = "Dacaris, nega do fogo, dona da areia, nega foda rainha da vida";
+        }
+        int x;
+        int y;
+        x = l.getChunk().getBlock(1, 0, 1).getLocation().getBlockX();
+        y = l.getChunk().getBlock(1, 0, 1).getLocation().getBlockZ();
+        Location up = new Location(l.getWorld(), x + 16, 0, y);
         Clan cUp = ClanLand.getClanAt(up);
         // nao tem clan em cima ou não é meu clan
         if (cUp == null || !cUp.getTag().equalsIgnoreCase(minhaTag)) {
             if (cUp != null && !cUp.getTag().equalsIgnoreCase(minhaTag)) {
                 return true;
             }
-            Location down = new Location(p.getWorld(), x - 16, 0, y);
+            Location down = new Location(l.getWorld(), x - 16, 0, y);
             Clan cDown = ClanLand.getClanAt(down);
             if (cDown == null || !cDown.getTag().equalsIgnoreCase(minhaTag)) {
                 if (cDown != null && !cDown.getTag().equalsIgnoreCase(minhaTag)) {
                     return true;
                 }
-                Location left = new Location(p.getWorld(), x, 0, y + 16);
+                Location left = new Location(l.getWorld(), x, 0, y + 16);
                 Clan cLeft = ClanLand.getClanAt(left);
                 if (cLeft == null || !cLeft.getTag().equalsIgnoreCase(minhaTag)) {
                     if (cLeft != null && !cLeft.getTag().equalsIgnoreCase(minhaTag)) {
                         return true;
                     }
-                    Location right = new Location(p.getWorld(), x, 0, y - 16);
+                    Location right = new Location(l.getWorld(), x, 0, y - 16);
                     Clan cRight = ClanLand.getClanAt(right);
                     if (cRight == null || !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                         if (cRight != null && !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                             return true;
                         }
-                        right = new Location(p.getWorld(), x - 16, 0, y - 16);
+                        right = new Location(l.getWorld(), x - 16, 0, y - 16);
                         cRight = ClanLand.getClanAt(right);
                         if (cRight == null || !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                             if (cRight != null && !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                 return true;
                             }
-                            right = new Location(p.getWorld(), x + 16, 0, y - 16);
+                            right = new Location(l.getWorld(), x + 16, 0, y - 16);
                             cRight = ClanLand.getClanAt(right);
                             if (cRight == null || !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                 if (cRight != null && !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                     return true;
                                 }
-                                right = new Location(p.getWorld(), x - 16, 0, y + 16);
+                                right = new Location(l.getWorld(), x - 16, 0, y + 16);
                                 cRight = ClanLand.getClanAt(right);
                                 if (cRight == null || !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                     if (cRight != null && !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                         return true;
                                     }
-                                    right = new Location(p.getWorld(), x + 16, 0, y + 16);
+                                    right = new Location(l.getWorld(), x + 16, 0, y + 16);
                                     cRight = ClanLand.getClanAt(right);
                                     if (cRight == null || !cRight.getTag().equalsIgnoreCase(minhaTag)) {
                                         if (cRight != null && !cRight.getTag().equalsIgnoreCase(minhaTag)) {
@@ -187,7 +192,7 @@ public class Terreno implements CommandExecutor {
                         return true;
                     }
                     ClanLand.addMemberAt(p.getLocation(), uuid);
-                    ClanLand.msg(p, L.m("O jogador %"  + ChatColor.GREEN + " agora eh membro deste terreno.",player));
+                    ClanLand.msg(p, L.m("O jogador %" + ChatColor.GREEN + " agora eh membro deste terreno.", player));
                     return true;
                 } else if (args[1].equals("rem") || args[1].equals("remover")) {
                     if (!ClanLand.isMemberAt(p.getLocation(), uuid)) {
@@ -195,14 +200,14 @@ public class Terreno implements CommandExecutor {
                         return true;
                     }
                     ClanLand.removeMemberAt(p.getLocation(), uuid);
-                    ClanLand.msg(p, L.m("O jogador %" + ChatColor.GREEN + " agora nao eh mais membro deste terreno.",player));
+                    ClanLand.msg(p, L.m("O jogador %" + ChatColor.GREEN + " agora nao eh mais membro deste terreno.", player));
                     return true;
                 } else {
                     sendHelp(cs, leader);
                     return true;
                 }
             } else {
-                ClanLand.msg(p, L.m("O jogador %"+ ChatColor.GREEN + " está offline.",player));
+                ClanLand.msg(p, L.m("O jogador %" + ChatColor.GREEN + " está offline.", player));
                 return true;
             }
         } else if (args.length == 2) {
@@ -250,11 +255,11 @@ public class Terreno implements CommandExecutor {
                 }
                 String owner = ClanLand.getOwnerAt(p.getLocation());
                 if (owner != null && owner.equals(alvo.getUniqueId().toString())) {
-                    ClanLand.msg(p, L.m("Esse terreno ja eh do jogador %",args[1]));
+                    ClanLand.msg(p, L.m("Esse terreno ja eh do jogador %", args[1]));
                     return true;
                 }
                 ClanLand.setOwnerAt(p.getLocation(), alvo.getUniqueId().toString());
-                ClanLand.msg(p, L.m("Esse terreno agora eh do jogador %"+ ChatColor.GREEN + ", do seu clan.",args[1]));
+                ClanLand.msg(p, L.m("Esse terreno agora eh do jogador %" + ChatColor.GREEN + ", do seu clan.", args[1]));
                 ClanLand.update(p, p.getLocation());
                 return true;
             } else {
@@ -293,7 +298,7 @@ public class Terreno implements CommandExecutor {
                 ClanLand.msg(p, L.m("Este terreno nem tem dono."));
                 return true;
             } else if (!c.getTag().equals(cp.getTag())) {
-                ClanLand.msg(p, L.m("Voce nao pode deixar terreno do clan %" + ChatColor.GREEN + ".",c.getColorTag()));
+                ClanLand.msg(p, L.m("Voce nao pode deixar terreno do clan %" + ChatColor.GREEN + ".", c.getColorTag()));
                 return true;
             }
             ClanLand.removeClanAt(p.getLocation());
@@ -325,11 +330,11 @@ public class Terreno implements CommandExecutor {
                 if (KoM.debugMode) {
                     KoM.log.info("TEM UM CLA INIMIGO AKI");
                 }
-                ClanLand.msg(p, L.m("O clan %" + ChatColor.GREEN + " ja eh dono desse terreno.",c.getColorTag()));
+                ClanLand.msg(p, L.m("O clan %" + ChatColor.GREEN + " ja eh dono desse terreno.", c.getColorTag()));
                 if (c.isRival(cp.getTag())) {
                     int ptosPilhagem = ClanLand.getPtosPilagem(cp.getTag(), c.getTag());
                     if (ptosPilhagem < CFG.custoAbaixarPower) {
-                        ClanLand.msg(p, L.m("Voce precisa de % pontos de pilhagem para dominar esta area",CFG.custoAbaixarPower));
+                        ClanLand.msg(p, L.m("Voce precisa de % pontos de pilhagem para dominar esta area", CFG.custoAbaixarPower));
                         return true;
                     }
                     ptosPilhagem -= CFG.custoAbaixarPower;
@@ -360,14 +365,14 @@ public class Terreno implements CommandExecutor {
                         p.sendMessage(ChatColor.RED + L.m("Voce precisa de 50 Esmeraldas para dominar o terreno !"));
                         return true;
                     }
-                    
+
                     ClanLand.removeClanAt(p.getLocation());
                     ClanLand.setClanAt(p.getLocation(), cp.getTag());
                     ClanLand.msg(p, ChatColor.GREEN + L.m("Voce dominou o terreno da guilda por 1 hora !"));
                     ClanLand.setPtosPilhagem(cp.getTag(), c.getTag(), ptosPilhagem);
                     RankDB.addPontoCache(p, Estatistica.DOMINADOR, 1);
                     for (ClanPlayer p2 : c.getOnlineMembers()) {
-                        p2.toPlayer().sendMessage(ChatColor.RED + L.m("Um territorio de sua guilda foi dominado pela guilda % por uma hora !!",cp.getTag()));
+                        p2.toPlayer().sendMessage(ChatColor.RED + L.m("Um territorio de sua guilda foi dominado pela guilda % por uma hora !!", cp.getTag()));
                     }
                     ClanLand.update(p, p.getLocation());
                     final Location loc = p.getLocation();
@@ -400,7 +405,7 @@ public class Terreno implements CommandExecutor {
             }
             int preco = qtdTerrenos * CFG.landPrice;
             if (!ClanLand.econ.has(p.getName(), preco)) {
-                ClanLand.msg(p, L.m("Voce precisa de % esmeraldas para dominar uma nova terra !",preco));
+                ClanLand.msg(p, L.m("Voce precisa de % esmeraldas para dominar uma nova terra !", preco));
                 return true;
             }
             if (KoM.debugMode) {
@@ -408,7 +413,7 @@ public class Terreno implements CommandExecutor {
             }
             int numeroMembrosGuilda = c.getSize();
             if (qtdTerrenos >= CFG.landMax + poder) {
-                ClanLand.msg(p, L.m("Sua guilda pode apenas ter % terrenos !",((int) CFG.landMax + (int) poder)));
+                ClanLand.msg(p, L.m("Sua guilda pode apenas ter % terrenos !", ((int) CFG.landMax + (int) poder)));
                 ClanLand.msg(p, L.m("Para ter mais terrenos, consiga mais poder recrutando membros novos ou com a pedra do poder !"));
                 return true;
             }
