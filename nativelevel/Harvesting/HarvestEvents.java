@@ -31,6 +31,7 @@ import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.NetherWartsState;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -123,6 +124,26 @@ public class HarvestEvents {
             }
         } 
 
+        // ANTI BUG DO CACAU
+        if(ev.getBlock().getType()==Material.LOG || ev.getBlock().getType() == Material.LOG_2) {
+            
+            if(ev.getBlock().getRelative(BlockFace.EAST).getType()==Material.COCOA) {
+                ev.getBlock().getRelative(BlockFace.EAST).setType(Material.AIR);
+            }
+            if(ev.getBlock().getRelative(BlockFace.NORTH).getType()==Material.COCOA) {
+                ev.getBlock().getRelative(BlockFace.NORTH).setType(Material.AIR);
+            }
+            if(ev.getBlock().getRelative(BlockFace.SOUTH).getType()==Material.COCOA) {
+                ev.getBlock().getRelative(BlockFace.SOUTH).setType(Material.AIR);
+            }
+            if(ev.getBlock().getRelative(BlockFace.WEST).getType()==Material.COCOA) {
+                ev.getBlock().getRelative(BlockFace.WEST).setType(Material.AIR);
+            }
+            
+        }
+        
+        
+        
         if (harv != null) {
 
             if (ev.getBlock().hasMetadata("playerpois")) {

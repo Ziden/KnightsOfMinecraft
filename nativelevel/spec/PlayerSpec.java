@@ -30,40 +30,40 @@ import org.bukkit.inventory.meta.ItemMeta;
 public enum PlayerSpec implements Listener {
 
     /*
-     Sacerdote - Imortalidade (regen fodao em area)
+    // MAGO
+     Bruxo     - Congelar Conjuração - Faz uma magia e congela ela, pra usar depois sem invocar os elementos.
+     Sabio     - Bomba Gravitacional 
     
-     Sabio     - Bomba Gravitacional
-    
-     Ranger    - Super Atirador
-    
+     // LADINO
+     Ranger    - Super Atirador - atira flecha sem carregar o arco
      Assassino - Shadowjump + 2 adagas
     
+     // PALADINO
      Guardião  - Toma 1/4 do dano dos aliados pra proteger eles
+     Crusador  - Combo Armas (espada -> machado -> pá) (rotação de armas)
     
-     Crusador  - Combo Armas (espada -> machado -> pá) (lifesteal)
-    
+     // ENG
      Fuzileiro - Tiro Carregado (tipo epica, com timing)
+     Inventor  - Autodispenser novo permanente de gente bem feito
     
-     Inventor  - Autodispenser novo permanente
-    
+     // ALQUIMISTA (REVER...)
      Cientista - Armadura Revestida - Causa slow e poison a atacantes físicos
+     Granadeiro - Taca uma tnt muito melhor
     
-     Explodidor - Taca uma tnt muito melhor
-    
-     Forjador - nao gasta durabilidade de items
-    
+     // FERREIRO
+     Armeiro - nao gasta durabilidade de items
      Macador - hits com pá tacam fogo & 2 pas
     
-     Pedreiro = arremeça pedras
-    
+     // MINERADOR
+     Pedreiro = arremeça pedras (cada pedra tem um efeito diferente)
      Explorador = joga tochas de fogo
     
-     Barbaro = pode usar 2 machados e dar + dano
-    
+     // LENHADOR
+     Barbaro = arremeça machados
      Carrasco = ganha vida ao acertar epica
     
+     // FAZENDEIRO (REVER)
      Ceifador - Arremeça uma foice
-    
      Druida = pode virar um papagaio e voar ou pousar no ombro de alguem
      */
     
