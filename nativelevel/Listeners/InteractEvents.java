@@ -148,7 +148,7 @@ public class InteractEvents implements Listener {
                 if (ev.getPlayer().isSneaking() == true) {
                     if (ev.getPlayer().getItemInHand().getItemMeta().getLore() != null || ev.getPlayer().getItemInHand().getItemMeta().getDisplayName() != null) {
                         for (String s : ev.getPlayer().getItemInHand().getItemMeta().getLore()) {
-                            if (s.contains("Classe:")) {
+                            if (s.contains("Classe:") || s.contains("!")) {
                                 return;
                             }
                         }
