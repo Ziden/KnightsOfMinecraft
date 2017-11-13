@@ -43,6 +43,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.ItemDespawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -79,6 +80,13 @@ public class BlacksmithAnvil extends KomSystem {
 
     @EventHandler
     public void itemSome(PlayerPickupItemEvent ev) {
+        if (flutuando.contains(ev.getItem())) {
+            ev.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void monstroPega(EntityPickupItemEvent ev) {
         if (flutuando.contains(ev.getItem())) {
             ev.setCancelled(true);
         }
