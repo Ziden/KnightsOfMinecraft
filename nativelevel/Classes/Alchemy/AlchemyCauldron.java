@@ -38,6 +38,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.ItemDespawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -79,6 +80,13 @@ public class AlchemyCauldron extends KomSystem {
         }
     }
 
+    @EventHandler
+    public void monstroPega(EntityPickupItemEvent ev) {
+        if (flutuando.contains(ev.getItem())) {
+            ev.setCancelled(true);
+        }
+    }
+    
     public static void displayItem(Block cauld, ItemStack inHand) {
         ItemStack paraDropar = new ItemStack(inHand.getType(), 1, inHand.getDurability(), inHand.getData().getData());
         ItemMeta meta = paraDropar.getItemMeta();
