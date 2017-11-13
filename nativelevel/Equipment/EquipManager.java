@@ -99,30 +99,29 @@ public class EquipManager extends KomSystem {
                     KoM.debug("OLD EH NULLLLL");
                 }
 
-                
                 ItemEquipavel oldHand = equipsAntigos.hand;
 
                 // i took weapon off
                 if ((newOffHand == null) && (oldOffHand != null)) {
                     KoM.debug("took off weapon off");
-                    if (EquipmentEvents.isOffHand(oldOffHand.mat)) {
+                    if (EquipmentEvents.isOffHand(oldOffHand.mat, oldOffHand.lore)) {
                         Bukkit.getServer().getPluginManager().callEvent(new PlayerUnequipEvent(player, oldOffHand.meta));
                     }
                 }
                 // i place weapon in
                 if ((oldOffHand == null) && (newOffHand != null)) {
                     KoM.debug("place weapon in");
-                    if (EquipmentEvents.isOffHand(newOffHand.mat)) {
+                    if (EquipmentEvents.isOffHand(newOffHand.mat, newOffHand.lore)) {
                         Bukkit.getServer().getPluginManager().callEvent(new PlayerEquipEvent(player, newOffHand.meta));
                     }
                 }
                 // replace weapon
                 if ((oldOffHand != null) && (newOffHand != null) && !oldOffHand.meta.isEqual(newOffHand.meta)) {
                     KoM.debug("replace weapon");
-                    if (EquipmentEvents.isOffHand(newOffHand.mat)) {
+                    if (EquipmentEvents.isOffHand(newOffHand.mat, newOffHand.lore)) {
                         Bukkit.getServer().getPluginManager().callEvent(new PlayerEquipEvent(player, newOffHand.meta));
                     }
-                    if (EquipmentEvents.isOffHand(oldOffHand.mat)) {
+                    if (EquipmentEvents.isOffHand(oldOffHand.mat, newOffHand.lore)) {
                         Bukkit.getServer().getPluginManager().callEvent(new PlayerUnequipEvent(player, oldOffHand.meta));
                     }
                 }

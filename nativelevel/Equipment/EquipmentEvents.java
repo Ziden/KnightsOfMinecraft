@@ -265,7 +265,14 @@ public class EquipmentEvents extends KomSystem {
 
     public static List<Material> offHands = Arrays.asList(new Material[]{Material.STICK, Material.SHIELD, Material.WOOD_SWORD});
 
-    public static boolean isOffHand(Material m) {
+    public static boolean isOffHand(Material m, List<String> lore) {
+        if(lore != null) {
+            for(String s : lore) {
+                if(s.contains("Mão Esquerda") || s.contains("Mão Secundária")) {
+                    return true;
+                }
+            }
+        }
         return m != null && (m == Material.STICK || m == Material.SHIELD || m.name().contains("WOOD_"));
     }
 

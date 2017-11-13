@@ -19,7 +19,8 @@ public class ItemEquipavel {
     public EquipMeta meta;
     public String displayName;
     public Material mat;
-
+    public List<String> lore;
+    
     public ItemEquipavel(ItemStack ss) {
         if(ss == null || ss.getType()==Material.AIR) {
             meta =  new EquipMeta();
@@ -32,6 +33,10 @@ public class ItemEquipavel {
         } else {
             displayName = meta.getDisplayName();
         }
+        if(meta.getLore()!=null)
+            lore = meta.getLore();
+        else
+            lore = new ArrayList<String>();
         this.meta = ItemAttributes.getAttributes(ss);
         this.mat = ss.getType();
     }
