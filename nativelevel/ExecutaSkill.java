@@ -287,7 +287,8 @@ public class ExecutaSkill {
             }
 
             if (event.getEntity() instanceof Creature && attacker.getItemInHand() != null && attacker.getItemInHand().getType() == Material.EGG) {
-                Farmer.transformaEmOvO(attacker, event.getEntity());
+                if(Farmer.transformaEmOvO(attacker, event.getEntity()))
+                    event.setCancelled(true);
                 return;
             }
             // player bate em player
