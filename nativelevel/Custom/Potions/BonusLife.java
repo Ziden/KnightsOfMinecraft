@@ -75,12 +75,11 @@ public class BonusLife extends CustomPotion {
         ev.getPlayer().addPotionEffect(efeito);
         ev.getPlayer().sendMessage(ChatColor.GREEN + L.m("* gulp gulp *"));
         KoM.efeitoBlocos(ev.getPlayer(), Material.WOOL);
-
     }
 
     @Override
     public void interage(PlayerInteractEvent ev) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

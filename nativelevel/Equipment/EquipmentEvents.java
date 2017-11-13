@@ -41,6 +41,8 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -243,8 +245,23 @@ public class EquipmentEvents extends KomSystem {
         EquipMeta playerEquipMeta = EquipManager.getPlayerEquipmentMeta(ev.getPlayer());
         EquipMeta.subMeta(playerEquipMeta, itemMeta);
         EquipManager.setPlayerEquipmentMeta(ev.getPlayer(), playerEquipMeta);
+        
+        PotionEffect bonusVida = null;
+        
+        for(PotionEffect pot : ev.getPlayer().getActivePotionEffects()) {
+            if(pot.getType()==PotionEffectType.HEALTH_BOOST) {
+                bonusVida = pot;
+            }
+        }
+        
+        if(bonusVida != null)
+            ev.getPlayer().removePotionEffect(PotionEffectType.HEALTH_BOOST);
+        
         ev.getPlayer().setMaxHealth(Health.getMaxHealth(ev.getPlayer(), ev.getPlayer().getLevel()));
 
+        if(bonusVida != null)
+            ev.getPlayer().addPotionEffect(bonusVida);
+        
         if (itemMeta.getAtributos().contains(Atributo.Mana) || itemMeta.getAtributos().contains(Atributo.Stamina)) {
             SBCore.AtualizaObjetivos(ev.getPlayer());
         }
