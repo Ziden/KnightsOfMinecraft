@@ -39,6 +39,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -58,12 +59,12 @@ public class Engineer {
 
     public static HashMap<UUID, UUID> leashed = new HashMap<UUID, UUID>();
 
-    public static void validaPrisao(PlayerInteractEvent ev) {
+    public static boolean validaPrisao(PlayerInteractEvent ev) {
         if (ev.getPlayer().hasMetadata("prendeu")) {
             if (ev.getPlayer().hasMetadata("euPrendi")) {
                 if (ev.getPlayer().hasMetadata("cabouDePrender")) {
                     ev.getPlayer().removeMetadata("cabouDePrender", KoM._instance);
-                    return;
+                    return false;
                 }
                 UUID prendeu = (UUID) MetaShit.getMetaObject("prendeu", ev.getPlayer());
                 Player preso = Bukkit.getPlayer(prendeu);
@@ -89,7 +90,7 @@ public class Engineer {
                         ((Bat) ev.getPlayer().getPassenger()).setLeashHolder(null);
                         ev.getPlayer().getPassenger().remove();
                     }
-                    return;
+                    return false;
                 } else {
                     if (quemPrendeu.getLocation().distance(ev.getPlayer().getLocation()) > 5) {
                         quemPrendeu.removeMetadata("euPrendi", KoM._instance);
@@ -104,15 +105,17 @@ public class Engineer {
                             ((Bat) ev.getPlayer().getPassenger()).setLeashHolder(null);
                             ev.getPlayer().getPassenger().remove();
                         }
-                        return;
+                        return false;
                     }
                 }
                 ev.setCancelled(true);
                 ev.setUseItemInHand(Event.Result.DENY);
                 ev.setUseInteractedBlock(Event.Result.DENY);
                 ev.getPlayer().sendMessage(ChatColor.RED + L.m("Voce esta amarrado e nao consegue usar as maos !"));
+                return true;
             }
         }
+        return false;
     }
 
     public static void prende(PlayerInteractEntityEvent ev) {
@@ -136,12 +139,15 @@ public class Engineer {
                     // prendendo
                     Bat porco = (Bat) ev.getPlayer().getWorld().spawnEntity(ev.getPlayer().getLocation(), EntityType.BAT);
                     porco.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999,1));
-                    alvo.setPassenger(porco);
+                   // alvo.addPassenger(porco);
                     MetaShit.setMetaObject("cabouDePrender", ev.getPlayer(), "sim");
                     MetaShit.setMetaObject("prendeu", ev.getRightClicked(), ev.getPlayer().getUniqueId());
                     MetaShit.setMetaObject("prendeu", ev.getPlayer(), ev.getRightClicked().getUniqueId());
                     MetaShit.setMetaObject("euPrendi", ev.getPlayer(), ev.getRightClicked().getUniqueId());
                     porco.setLeashHolder(ev.getPlayer());
+
+                    alvo.addPassenger(porco);
+                   
                     ev.getPlayer().sendMessage(ChatColor.GREEN + L.m("Voce prendeu o alvo !"));
                     ev.getPlayer().sendMessage(ChatColor.GREEN + L.m("Se voce fizer algo ou ir muito longe ira soltar o alvo !"));
                     alvo.sendMessage(ChatColor.RED + ev.getPlayer().getName() + L.m(" Te segurou numa corrente eletrica"));

@@ -119,6 +119,7 @@ public class Pistola extends CustomItem {
                 //snowball.setVelocity(player.getLocation().getDirection().multiply(2f));
 
             MetaShit.setMetaString("tipoTiro", snowball, "kaboom");
+            MetaShit.setMetaString("bonka", snowball, "");
             /*
             AttributeInfo info = KnightsOfMania.database.getAtributos(player);
             double ratio = 0.4 + ((Attributes.calcMagicDamage(PlayerSpec.temSpec(player, PlayerSpec.Sabio), info.attributes.get(Attr.intelligence))) + Attributes.calcArcheryDamage(info.attributes.get(Attr.dexterity)) / 2);

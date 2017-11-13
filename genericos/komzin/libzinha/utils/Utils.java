@@ -1,6 +1,6 @@
-/*    */ package instamc.coders.libkom.utils;
+/*    */ package genericos.komzin.libzinha.utils;
 /*    */ 
-/*    */ import instamc.coders.libkom.InstaMCLibKom;
+/*    */ import genericos.komzin.libzinha.InstaMCLibKom;
 /*    */ import java.io.ByteArrayOutputStream;
 /*    */ import java.io.DataOutputStream;
 /*    */ import java.io.IOException;

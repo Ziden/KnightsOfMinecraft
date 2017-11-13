@@ -39,6 +39,7 @@ import nativelevel.Lang.L;
 import nativelevel.MetaShit;
 import nativelevel.MetaShit;
 import nativelevel.Attributes.AttributeInfo;
+import nativelevel.Jobs.TipoClasse;
 import nativelevel.bencoes.TipoBless;
 import nativelevel.gemas.Raridade;
 import nativelevel.integration.WorldGuardKom;
@@ -64,9 +65,11 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
@@ -146,6 +149,25 @@ public class Mobs extends KomSystem {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void spawn(final CreatureSpawnEvent ev) {
 
+        // MULA DUPA ITEM
+        if(ev.getEntity().getType()==EntityType.MULE) {
+            ev.setCancelled(true);
+            return;
+        }
+        
+        if(ev.getEntity().getType()==EntityType.LLAMA) {
+            ev.setCancelled(true);
+            return;
+        }
+        
+        if(ev.getEntity().getType()==EntityType.HORSE) {
+            Horse h = (Horse)ev.getEntity();
+            if(h.getVariant()==Variant.MULE || h.getVariant()==Variant.DONKEY) {
+                ev.setCancelled(true);
+                return;
+            }
+        }
+        
         if (ev.getSpawnReason() == SpawnReason.NATURAL) {
             int numeroPerto = ev.getEntity().getNearbyEntities(25, 4, 25).size();
             if (numeroPerto > 4) {
@@ -657,6 +679,14 @@ public class Mobs extends KomSystem {
             double xpTotal = XP.getExpPorAcao(levelDaZona * 5);
             
             xpTotal *= 1.2; // pokin melhor vai...
+            
+            if(ev.getEntity().getKiller()!=null) {
+                if(Jobs.getJobLevel(Jobs.Classe.Mago, ev.getEntity().getKiller())==TipoClasse.PRIMARIA ||
+                   Jobs.getJobLevel(Jobs.Classe.Paladino, ev.getEntity().getKiller())==TipoClasse.PRIMARIA ||
+                   Jobs.getJobLevel(Jobs.Classe.Ladino, ev.getEntity().getKiller())==TipoClasse.PRIMARIA ) {
+                    xpTotal *= 1.2;
+                }
+            }
             
             if (Deuses.odio) {
                 xpTotal = xpTotal;

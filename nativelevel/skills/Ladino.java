@@ -14,6 +14,11 @@ public class Ladino {
         
         List<Skill> skills = new ArrayList<Skill>();
 
+        Skill sMob = new Skill("Caçador de Mobs", 6, false);
+        sMob.setLore(new String[]{"§9Ganha mais XP ao matar Monstros"});
+        skills.add(sMob);
+
+        
         Skill s1 = new Skill("Bomba de Fumaça", 15, false);
         s1.setLore(new String[]{"§9Permite usar bomba de fumaça para ficar invisivel."});
         skills.add(s1);

@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom.comandos;
+/*    */ package genericos.komzin.libzinha.comandos;
 /*    */ 
 /*    */ import java.io.PrintStream;
 /*    */ import org.bukkit.GameMode;

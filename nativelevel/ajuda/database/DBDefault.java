@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 import java.util.logging.Level;
+import nativelevel.KoM;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -49,7 +50,7 @@ public class DBDefault
         Bukkit.getLogger().info("ERRO: Conexao ao banco de dados MySQL falhou!");
         Bukkit.getLogger().info("ERRO: " + ex);
       }
-      this.connection = DriverManager.getConnection(endereco, "root", "2016camila55");
+      this.connection = DriverManager.getConnection(endereco, "root", KoM.camila);
       return this.connection;
     }
     catch (ClassNotFoundException e)

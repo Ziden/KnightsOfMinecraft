@@ -26,9 +26,8 @@ import org.bukkit.inventory.ItemStack;
 /**
  *
  * @author Gabriel
- * 
+ *
  */
-
 public class MercadoSQL {
 
     public static String url = "jdbc:mysql://localhost:3306/";
@@ -223,9 +222,10 @@ public class MercadoSQL {
     static String vencido = "(data+interval 7 day) > now()";
 
     public static boolean RemoverProduto(MarketItem item) {
+        PreparedStatement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUTOS WHERE owner=? AND id=? LIMIT 1;");
+            statement = connection.prepareStatement("DELETE FROM PRODUTOS WHERE owner=? AND id=? LIMIT 1;");
             statement.setString(1, item.dono.toString());
             statement.setInt(2, item.ID);
             statement.executeUpdate();
@@ -233,13 +233,23 @@ public class MercadoSQL {
         } catch (Exception ex) {
             ErroMysql(ex);
             return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
     public static boolean RemoverProdutoOld(MarketItem item) {
+        PreparedStatement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUTOS WHERE owner=? AND name=? AND preco=? AND itemstack=? LIMIT 1;");
+            statement = connection.prepareStatement("DELETE FROM PRODUTOS WHERE owner=? AND name=? AND preco=? AND itemstack=? LIMIT 1;");
             statement.setString(1, item.dono.toString());
             statement.setString(2, item.ItemStack.getType().name());
             statement.setDouble(3, item.Valor);
@@ -249,13 +259,23 @@ public class MercadoSQL {
         } catch (Exception ex) {
             ErroMysql(ex);
             return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
     public static int QuantidadeProdutos(Player p) {
+        PreparedStatement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM PRODUTOS WHERE owner = ?");
+            statement = connection.prepareStatement("SELECT COUNT(*) FROM PRODUTOS WHERE owner = ?");
             statement.setString(1, p.getUniqueId().toString());
             ResultSet rs = statement.executeQuery();
             rs.next();
@@ -263,13 +283,23 @@ public class MercadoSQL {
         } catch (Exception ex) {
             ErroMysql(ex);
             return 0;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
     public static boolean ExisteProdutoOld(MarketItem item) {
+        PreparedStatement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUTOS WHERE owner=? AND name=? AND preco=? AND itemstack=? LIMIT 1;");
+            statement = connection.prepareStatement("SELECT * FROM PRODUTOS WHERE owner=? AND name=? AND preco=? AND itemstack=? LIMIT 1;");
             statement.setString(1, item.dono.toString());
             statement.setString(2, item.ItemStack.getType().name());
             statement.setDouble(3, item.Valor);
@@ -279,19 +309,38 @@ public class MercadoSQL {
         } catch (Exception ex) {
             ErroMysql(ex);
             return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
     public static boolean ExisteProduto(MarketItem item) {
+        PreparedStatement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUTOS WHERE id=? LIMIT 1;");
+            statement = connection.prepareStatement("SELECT * FROM PRODUTOS WHERE id=? LIMIT 1;");
             statement.setInt(1, item.ID);
             ResultSet rs = statement.executeQuery();
             return rs.next();
         } catch (Exception ex) {
             ErroMysql(ex);
             return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
@@ -299,11 +348,13 @@ public class MercadoSQL {
 
     public static List<MarketItem> CarregaTodosProdutosCatalogo(CategoriaItem categoria) {
         List<MarketItem> ListaProdutos = new ArrayList();
+        ResultSet rs = null;
+        Statement statement = null;
         try {
             MercadoSQL.ConnectMySQL();
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             String sql = "SELECT * FROM PRODUTOS WHERE " + vencido + " and tipo = '" + categoria.name() + "' " + orderby;
-            ResultSet rs = statement.executeQuery(sql);
+            rs = statement.executeQuery(sql);
             while (rs.next()) {
 
                 ItemStack item = Utils.deserializeItemStacks(Utils.BlobToBytes(rs.getBlob("itemstack")));
@@ -327,6 +378,19 @@ public class MercadoSQL {
             }
         } catch (Exception ex) {
             ErroMysql(ex);
+        } finally {
+
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
         return ListaProdutos;
     }
@@ -336,19 +400,34 @@ public class MercadoSQL {
             new Thread() {
                 @Override
                 public void run() {
+                    ResultSet rs = null;
+                    Statement statement = null;
                     try {
                         int retorno = MercadoSQL.getRetorno(p);
                         if (retorno > 0) {
                             p.sendMessage("§2[Mercado] §6Você tem dinheiro no mercado!");
                         }
-                        Statement statement = connection.createStatement();
+                        statement = connection.createStatement();
                         String sql = "SELECT 1 FROM PRODUTOS WHERE owner='" + p.getUniqueId().toString() + "' and (data+interval 2 day) <=now();";
-                        ResultSet rs = statement.executeQuery(sql);
+                        rs = statement.executeQuery(sql);
                         if (rs.next()) {
                             p.sendMessage("§2[Mercado] §6Você tem itens vencidos no mercado !");
                         }
                     } catch (Exception ex) {
                         ErroMysql(ex);
+                    } finally {
+
+                        try {
+                            if (statement != null) {
+                                statement.close();
+                            }
+                            if (rs != null) {
+                                rs.close();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                 }
@@ -358,9 +437,11 @@ public class MercadoSQL {
 
     public static List<MarketItem> CarregaProdutosPorNick(String nick, boolean self) {
         List<MarketItem> ListaProdutos = new ArrayList();
+        Statement statement = null;
+        ResultSet rs = null;
         try {
             MercadoSQL.ConnectMySQL();
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
 
             String sql = "SELECT * FROM PRODUTOS where nickowner LIKE '" + nick + "' ";
             if (!self) {
@@ -368,7 +449,7 @@ public class MercadoSQL {
 
             }
             sql += orderby;
-            ResultSet rs = statement.executeQuery(sql);
+            rs = statement.executeQuery(sql);
 
             while (rs.next()) {
                 ItemStack item = Utils.deserializeItemStacks(Utils.BlobToBytes(rs.getBlob("itemstack")));
@@ -384,18 +465,33 @@ public class MercadoSQL {
             }
         } catch (Exception ex) {
             ErroMysql(ex);
+        } finally {
+
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
         return ListaProdutos;
     }
 
     public static List<MarketItem> CarreProdutosPorNome(String nome) {
         List<MarketItem> ListaProdutos = new ArrayList();
+          Statement statement = null;
+        ResultSet rs = null;
         try {
             MercadoSQL.ConnectMySQL();
-            Statement statement = connection.createStatement();
+             statement = connection.createStatement();
             String sql = "SELECT * FROM PRODUTOS where (name LIKE '%" + nome + "%' OR customname LIKE '%" + nome + "%' or pt_BR LIKE '%" + nome + "%') and " + vencido + " " + orderby + ";";
 
-            ResultSet rs = statement.executeQuery(sql);
+             rs = statement.executeQuery(sql);
             while (rs.next()) {
                 ItemStack item = Utils.deserializeItemStacks(Utils.BlobToBytes(rs.getBlob("itemstack")));
                 MarketItem mi = new MarketItem(UUID.fromString(rs.getString("owner")), item, rs.getDouble("preco"), rs.getString("nickowner"), rs.getInt("id"), rs.getInt("cash") == 1 ? true : false);
@@ -404,6 +500,19 @@ public class MercadoSQL {
             }
         } catch (Exception ex) {
             ErroMysql(ex);
+        } finally {
+
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
         return ListaProdutos;
     }

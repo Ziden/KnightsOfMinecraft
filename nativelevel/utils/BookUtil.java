@@ -74,6 +74,12 @@ public class BookUtil {
                 Chest c = (Chest) possivel.getState();
                 for (ItemStack coisa : c.getBlockInventory().getContents()) {
                     if (coisa != null && (coisa.getType() == Material.WRITTEN_BOOK)) {
+                        
+                        CustomItem ci = CustomItem.getItem(coisa);
+                        if(ci != null && ci instanceof RecipeBook) {
+                            return;
+                        }
+                        
                         ItemStack otroLivro = coisa.clone();
                         BookMeta m = (BookMeta) otroLivro.getItemMeta();
                         if(m != null && m.getTitle().contains("Quest") || (m.getDisplayName()!=null && m.getDisplayName().contains("Quest"))) {

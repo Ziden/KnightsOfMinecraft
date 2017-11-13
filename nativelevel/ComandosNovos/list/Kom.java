@@ -19,7 +19,7 @@ public class Kom extends Comando {
 
     public Kom() {
         super("kom2", CommandType.TODOS);
-        subs.add(new CmdMostraChance());
+        subs.add(new CmdTeste());
         subs.add(new CmdHarvest());
         subs.add(new CmdCrafts());
         subs.add(new CmdPlants());

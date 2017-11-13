@@ -254,6 +254,13 @@ public class DamageListener implements Listener {
 
         KoM.debug("Dano no começo do rolaporrada " + event.getDamage());
 
+        if(event.getCause()==DamageCause.BLOCK_EXPLOSION || event.getCause()==DamageCause.ENTITY_EXPLOSION) {
+            if(WorldGuardKom.ehSafeZone(event.getEntity().getLocation())) {
+                event.setCancelled(true);
+                return;
+            }
+        }
+        
         if (!(event.getEntity().getType() == EntityType.PLAYER) && event.getDamager().getType() == EntityType.PLAYER) {
             Farmer.coletaDropExtraDeAnimal((Player) event.getDamager(), event.getEntity());
         }

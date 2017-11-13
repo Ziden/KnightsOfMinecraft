@@ -44,6 +44,7 @@ import nativelevel.mercadinho.MenuMercado;
 import nativelevel.sisteminhas.QuestsIntegracao;
 import nativelevel.spec.PlayerSpec;
 import nativelevel.utils.BookUtil;
+import nativelevel.utils.Cooldown;
 import nativelevel.utils.itemattributes.Slot;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
@@ -101,6 +102,10 @@ public class InteractEvents implements Listener {
     public void interageEntidade(PlayerInteractEntityEvent ev) {
 
         KoM.debug("interage low inicio");
+
+        if (ev.getRightClicked() != null && ev.getRightClicked().getType() == EntityType.MINECART_HOPPER) {
+
+        }
 
         if (ev.getPlayer().getItemInHand() != null && (ev.getPlayer().getItemInHand().getType() == Material.WATER_BUCKET || ev.getPlayer().getItemInHand().getType() == Material.LAVA_BUCKET)) {
             ev.setCancelled(true);
@@ -219,32 +224,39 @@ public class InteractEvents implements Listener {
         if (ev.getPlayer().getLocation().getPitch() < -88) {
             if (Jobs.getJobLevel("Paladino", ev.getPlayer()) == 1) {
                 String aqui = ClanLand.getTypeAt(ev.getPlayer().getLocation());
-                if (aqui == null || !aqui.equalsIgnoreCase("safe")) {
-                    if (ev.getItem() != null && ev.getItem().getType().name().contains("SWORD")) {
-                        if (Mana.spendMana(ev.getPlayer(), 40)) {
-                            ev.getPlayer().sendMessage(ChatColor.GREEN + "Voce da um grito para chamar a atenção !");
-                            for (Entity e : ev.getPlayer().getNearbyEntities(5, 5, 5)) {
-                                if (e.getType() == EntityType.PLAYER) {
-                                    Player alvo = (Player)e;
-                                    if(Thief.taInvisivel(alvo))
-                                        Thief.revela(alvo);
-                                    alvo.sendMessage(ChatColor.AQUA + ev.getPlayer().getName() + " da um grito muito alto");
-                                    if (e.getWorld().getName().equalsIgnoreCase(CFG.mundoGuilda)) {
+
+                if (!Cooldown.isCooldown(ev.getPlayer(), "grito")) {
+                    Cooldown.setMetaCooldown(ev.getPlayer(), "grito", 5000);
+                    if (aqui == null || !aqui.equalsIgnoreCase("safe")) {
+                        if (ev.getItem() != null && ev.getItem().getType().name().contains("SWORD")) {
+                            if (Mana.spendMana(ev.getPlayer(), 40)) {
+                                ev.getPlayer().sendMessage(ChatColor.GREEN + "Voce da um grito para chamar a atenção !");
+                                for (Entity e : ev.getPlayer().getNearbyEntities(5, 5, 5)) {
+                                    if (e.getType() == EntityType.PLAYER) {
+                                        Player alvo = (Player) e;
+                                        if (Thief.taInvisivel(alvo)) {
+                                            Thief.revela(alvo);
+                                        }
+                                        alvo.sendMessage(ChatColor.AQUA + ev.getPlayer().getName() + " da um grito muito alto");
+                                        if (e.getWorld().getName().equalsIgnoreCase(CFG.mundoGuilda)) {
+                                            Vector ve = e.getLocation().toVector();
+                                            Vector v = ve.subtract(ev.getPlayer().getLocation().toVector()).normalize().multiply(2);
+                                            v.setY(0.6);
+                                            e.setVelocity(v);
+                                        }
+                                    } else if (e instanceof Monster) {
+                                        ((Monster) e).setTarget(ev.getPlayer());
                                         Vector ve = e.getLocation().toVector();
                                         Vector v = ve.subtract(ev.getPlayer().getLocation().toVector()).normalize().multiply(2);
                                         v.setY(0.6);
                                         e.setVelocity(v);
                                     }
-                                } else if (e instanceof Monster) {
-                                    ((Monster) e).setTarget(ev.getPlayer());
-                                    Vector ve = e.getLocation().toVector();
-                                    Vector v = ve.subtract(ev.getPlayer().getLocation().toVector()).normalize().multiply(2);
-                                    v.setY(0.6);
-                                    e.setVelocity(v);
                                 }
                             }
                         }
                     }
+                } else {
+                    ev.getPlayer().sendMessage(ChatColor.RED+"Aguarde para poder fazer isto novamente.");
                 }
             }
         }
@@ -379,13 +391,16 @@ public class InteractEvents implements Listener {
 
         KoM.debug("Interage lowest " + ev.isCancelled());
 
-       // if(ev.isCancelled() && ev.getAction()==Action.RIGHT_CLICK_AIR)
+        // if(ev.isCancelled() && ev.getAction()==Action.RIGHT_CLICK_AIR)
         //     ev.setCancelled(false);
         if (Paralyze.isParalizado(ev.getPlayer())) {
             ev.setCancelled(true);
             KoM.debug("paralizado");
             return;
         }
+        
+        if(Engineer.validaPrisao(ev))
+            return;
 
         // CUSTOM ITEMS
         ItemListener.interage(ev);
@@ -406,7 +421,7 @@ public class InteractEvents implements Listener {
             return;
         }
 
-        Engineer.validaPrisao(ev);
+       
 
         KoM.debug("Entrando bloco hidraulico");
 
@@ -974,8 +989,8 @@ public class InteractEvents implements Listener {
         }
         Clan aqui = ClanLand.getClanAt(bp);
         ClanPlayer cp = ClanLand.manager.getClanPlayer(ev.getPlayer());
-        if(type.equalsIgnoreCase("CLAN") && aqui != null) {
-            if(cp==null || !cp.getTag().equalsIgnoreCase(aqui.getTag())) {
+        if (type.equalsIgnoreCase("CLAN") && aqui != null) {
+            if (cp == null || !cp.getTag().equalsIgnoreCase(aqui.getTag())) {
                 ev.setCancelled(true);
                 return;
             }

@@ -196,6 +196,7 @@ public class Minerador {
                 public void run() {
                     inimigo.removeMetadata("disarm", KoM._instance);
                     inimigo.sendMessage(ChatColor.GREEN + "Sua mao se recupera");
+                    EquipManager.checkEquips(inimigo);
                 }
             };
             Bukkit.getScheduler().scheduleSyncDelayedTask(KoM._instance, r, tempo);

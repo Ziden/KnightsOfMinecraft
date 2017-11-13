@@ -1,4 +1,4 @@
-package instamc.coders.libkom.reboot;
+package genericos.komzin.libzinha.reboot;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

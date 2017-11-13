@@ -1,7 +1,7 @@
-/*     */ package instamc.coders.libkom.comandos;
+/*     */ package genericos.komzin.libzinha.comandos;
 /*     */ 
-/*     */ import instamc.coders.libkom.InstaMCLibKom;
-/*     */ import instamc.coders.libkom.PlayerInfo;
+/*     */ import genericos.komzin.libzinha.InstaMCLibKom;
+/*     */ import genericos.komzin.libzinha.PlayerInfo;
 /*     */ import java.util.Random;
 import nativelevel.MetaShit;
 /*     */ import org.bukkit.ChatColor;

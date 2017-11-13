@@ -14,6 +14,11 @@ public class Paladino {
         
         List<Skill> skills = new ArrayList<Skill>();
 
+        Skill sMob = new Skill("Caçador de Mobs", 6, false);
+        sMob.setLore(new String[]{"§9Ganha mais XP ao matar Monstros"});
+        skills.add(sMob);
+
+        
         Skill s1 = new Skill("Usar Escudos", 5, false);
         s1.setLore(new String[]{"§9Permite bloquear ataques em frente usando uma porta de ferro ou escudos."});
         skills.add(s1);

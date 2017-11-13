@@ -369,9 +369,16 @@ public class MenuMercado extends KomSystem {
                          return;
                          }
                          */
-                        p.getInventory().remove(aVenda);
-                        MercadoSQL.InserirProduto(new MarketItem(p.getUniqueId(), aVenda, preco, p.getName(), 0, true));
-                        p.sendMessage(ChatColor.GREEN + L.m("Item colocado a venda por ") + preco + " CASH");
+                        //p.getInventory().remove(aVenda);
+                        boolean ok = KoM.gastaItem(p, aVenda);
+
+                        if (ok) {
+                            MercadoSQL.InserirProduto(new MarketItem(p.getUniqueId(), aVenda, preco, p.getName(), 0, true));
+                            p.sendMessage(ChatColor.GREEN + L.m("Item colocado a venda por ") + preco + " CASH");
+                        } else {
+                            p.sendMessage(ChatColor.RED + "Erro, contate um admin e explique como replicar este erro e ganhe recompensas !");
+                        }
+
                         p.closeInventory();
                     }
                 }

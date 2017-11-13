@@ -223,7 +223,8 @@ public class Blacksmith extends KomSystem {
                     if (inimigo.getInventory().getHelmet().getType() == Material.LEATHER_HELMET) {
                         inimigo.getInventory().setHelmet(null);
                     } else {
-                        inimigo.getInventory().getHelmet().setDurability((short) (inimigo.getInventory().getHelmet().getDurability() + 20));
+                        if(inimigo.getInventory().getHelmet().getType()!=Material.SKULL_ITEM)
+                            inimigo.getInventory().getHelmet().setDurability((short) (inimigo.getInventory().getHelmet().getDurability() + 20));
                     }
                 }
                 inimigo.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 6, 10));

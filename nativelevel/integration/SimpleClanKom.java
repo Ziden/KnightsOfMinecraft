@@ -81,11 +81,8 @@ public class SimpleClanKom {
 
     public static boolean canPvp(Player atacante, Player defensor) {
 
-        KoM.debug("CAN PVP ?");
-
         if (atacante.getWorld().getName().equalsIgnoreCase("dungeon")) {
             // if (!Criminoso.isCriminoso(defensor)) {
-            KoM.debug("NO CAN PVP");
             return false;
             // }
         }
@@ -101,6 +98,7 @@ public class SimpleClanKom {
             } else {
                 // criminoso tomando
                 if (Criminoso.isCriminoso(atacante)) {
+                    // criminoso batendo em alguem, nop
                     KoM.debug("NO CAN PVP");
                     return false;
                 }

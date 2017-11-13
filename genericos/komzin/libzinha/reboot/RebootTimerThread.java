@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom.reboot;
+/*    */ package genericos.komzin.libzinha.reboot;
 /*    */ 
 /*    */ import java.io.PrintStream;
 /*    */ import java.util.Calendar;

@@ -1,7 +1,7 @@
-/*    */ package instamc.coders.libkom.comandos;
+/*    */ package genericos.komzin.libzinha.comandos;
 /*    */ 
-/*    */ import instamc.coders.libkom.listeners.GeralListener;
-/*    */ import instamc.coders.libkom.utils.Efeitos;
+/*    */ import genericos.komzin.libzinha.listeners.GeralListener;
+/*    */ import genericos.komzin.libzinha.utils.Efeitos;
 /*    */ import java.util.HashSet;
 /*    */ import org.bukkit.Location;
 /*    */ import org.bukkit.Material;

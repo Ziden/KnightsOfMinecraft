@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom.reboot;
+/*    */ package genericos.komzin.libzinha.reboot;
 /*    */ 
 /*    */ import java.util.Date;
 import nativelevel.KoM;

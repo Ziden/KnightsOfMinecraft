@@ -30,6 +30,8 @@ import nativelevel.Lang.L;
 import static nativelevel.Listeners.GeneralListener.loots;
 import static nativelevel.Listeners.GeneralListener.taPelado;
 import nativelevel.Classes.Mage.spelllist.Paralyze;
+import nativelevel.Custom.Items.SeguroDeItems;
+import nativelevel.Equipment.EquipManager;
 import nativelevel.MetaShit;
 import nativelevel.bencoes.TipoBless;
 import nativelevel.integration.BungeeCordKom;
@@ -108,16 +110,26 @@ public class PlayerEvents implements Listener {
             ev.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
         }
 
-        if (!ev.getPlayer().getWorld().getName().equalsIgnoreCase("woe") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("dungeon")) {
+        if (!ev.getPlayer().getWorld().getName().equalsIgnoreCase("arena") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("woe") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("dungeon")) {
             if (LogoutTrap.trapeados.contains(ev.getPlayer().getName())) {
-                for (int slot = 0; slot < 40; slot++) {
-                    if (ev.getPlayer().getInventory().getItem(slot) != null && ev.getPlayer().getInventory().getItem(slot).getType() != Material.AIR) {
-                        ev.getPlayer().getLocation().getWorld().dropItemNaturally(ev.getPlayer().getLocation(), new ItemStack(ev.getPlayer().getInventory().getItem(slot)));
-                        ev.getPlayer().getInventory().setItem(slot, null);
-                    }
-                }
-                ev.getPlayer().teleport(ev.getPlayer().getWorld().getSpawnLocation());
+                LogoutTrap.trapeados.remove(ev.getPlayer().getName());
+                ev.getPlayer().setHealth(0);
             }
+            /*
+             if(SeguroDeItems.segurou(ev.getPlayer())) {
+             ev.getPlayer().teleport(ev.getPlayer().getWorld().getSpawnLocation());
+             return;
+             }
+             if (LogoutTrap.trapeados.contains(ev.getPlayer().getName())) {
+             for (int slot = 0; slot < 40; slot++) {
+             if (ev.getPlayer().getInventory().getItem(slot) != null && ev.getPlayer().getInventory().getItem(slot).getType() != Material.AIR) {
+             ev.getPlayer().getLocation().getWorld().dropItemNaturally(ev.getPlayer().getLocation(), new ItemStack(ev.getPlayer().getInventory().getItem(slot)));
+             ev.getPlayer().getInventory().setItem(slot, null);
+             }
+             }
+             ev.getPlayer().teleport(ev.getPlayer().getWorld().getSpawnLocation());
+             }
+             */
         }
     }
 
@@ -180,7 +192,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority=EventPriority.LOWEST)
     public void pressNumberHotkey(final PlayerItemHeldEvent ev) {
         if (ev.getPlayer().hasMetadata("disarm")) {
             final int slot = ev.getPreviousSlot();
@@ -193,6 +205,7 @@ public class PlayerEvents implements Listener {
             };
             Bukkit.getScheduler().scheduleSyncDelayedTask(KoM._instance, r, 0);
             ev.setCancelled(true);
+            EquipManager.checkEquips(ev.getPlayer());
         }
 
         ItemStack selecionou = ev.getPlayer().getInventory().getItem(ev.getNewSlot());
@@ -568,7 +581,7 @@ public class PlayerEvents implements Listener {
                 p.getInventory().setChestplate(s);
                 continue;
             }
-            if (s.getType().name().contains("HELMET") && (p.getInventory().getHelmet() == null || p.getInventory().getHelmet().getType() == Material.AIR)) {
+            if (((s.getType()==Material.PUMPKIN && s.getAmount()==1) || (s.getType()==Material.SKULL_ITEM) || s.getType().name().contains("HELMET")) && (p.getInventory().getHelmet() == null || p.getInventory().getHelmet().getType() == Material.AIR)) {
                 p.getInventory().setHelmet(s);
                 continue;
             }

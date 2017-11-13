@@ -5,7 +5,7 @@
  */
 package nativelevel.Custom.Potions;
 
-import instamc.coders.libkom.listeners.GeralListener;
+import genericos.komzin.libzinha.listeners.GeralListener;
 import me.fromgate.playeffect.PlayEffect;
 import me.fromgate.playeffect.VisualEffect;
 import nativelevel.Lang.L;

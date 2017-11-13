@@ -84,19 +84,10 @@ public class Mago {
         s11.setLore(new String[]{"§9Combine elementos com um livro", Wizard.TERRA + " " + Wizard.LIGHT + " " + Wizard.LIGHT, "§9Se teleporta para um local proximo", "Precisa da magia no livro de magias"});
         skills.add(s11);
 
-        skills.add(s0);//
-        skills.add(s1);
-        skills.add(s2);
-        skills.add(s3);
-        skills.add(s4);
-        skills.add(s5);
-        skills.add(s6);
-        skills.add(s7);
-        skills.add(s8);
-        skills.add(s9);
-        skills.add(s10);
-        skills.add(s11);
-
+        Skill sMob = new Skill("Caçador de Mobs", 6, false);
+        sMob.setLore(new String[]{"§9Ganha mais XP ao matar Monstros"});
+        skills.add(sMob);
+        
         Collections.sort(skills, new Comparator<Skill>() {
             @Override
             public int compare(Skill p1, Skill p2) {

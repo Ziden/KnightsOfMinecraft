@@ -1,10 +1,10 @@
-/*     */ package instamc.coders.libkom.listeners;
+/*     */ package genericos.komzin.libzinha.listeners;
 /*     */
 
 import nativelevel.utils.TitleAPI;
-/*     */ import instamc.coders.libkom.InstaMCLibKom;
-import instamc.coders.libkom.reboot.RebootUtils;
-/*     */ import instamc.coders.libkom.utils.Efeitos;
+/*     */ import genericos.komzin.libzinha.InstaMCLibKom;
+import genericos.komzin.libzinha.reboot.RebootUtils;
+/*     */ import genericos.komzin.libzinha.utils.Efeitos;
 /*     */ import java.util.HashSet;
 /*     */ import java.util.Set;
 /*     */ import java.util.UUID;

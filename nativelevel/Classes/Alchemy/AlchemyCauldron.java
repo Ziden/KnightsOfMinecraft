@@ -353,7 +353,7 @@ public class AlchemyCauldron extends KomSystem {
                                 cauld.setData((byte) 0);
                             }
                         } else {
-                            int xp = XP.getExpPorAcao(minSkill) * 5;
+                            int xp = XP.getExpPorAcao(minSkill) * 3;
                             xp *= expRatio;
                             
                             if(tipoClasse==TipoClasse.SEGUNDARIA)

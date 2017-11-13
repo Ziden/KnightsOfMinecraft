@@ -1,6 +1,5 @@
 package nativelevel.Attributes;
 
-
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import java.util.Arrays;
@@ -15,6 +14,7 @@ import nativelevel.Equipment.Atributo;
 import nativelevel.Classes.Mage.SpellParticleEffects;
 import nativelevel.Classes.Mage.spelllist.Paralyze;
 import nativelevel.sisteminhas.KomSystem;
+import nativelevel.utils.Cooldown;
 import nativelevel.utils.LocUtils;
 import net.minecraft.server.v1_12_R1.ItemShield;
 import org.bukkit.Bukkit;
@@ -78,26 +78,31 @@ public class AtributeListener extends KomSystem {
     
      */
     public void stun(Player batendo, final LivingEntity tomando, EquipMeta metaBatendo) {
-
+        
         double chanceStun = metaBatendo.getAttribute(Atributo.Chance_Stun);
         if (Jobs.rnd.nextInt(100) < chanceStun) {
-            double tempoStun = metaBatendo.getAttribute(Atributo.Tempo_Stun);
-            Paralyze.paraliza(tomando);
-            batendo.sendMessage(ChatColor.GREEN + "Paralizou o alvo");
-            Runnable de = new Runnable() {
-                public void run() {
-                    if (tomando == null) {
-                        return;
-                    }
-
-                    if (Paralyze.isParalizado(tomando)) {
-                        Paralyze.removeParalize(tomando);
-                    }
+            if (!Cooldown.isCooldown(batendo, "stunou")) {
+                double tempoStun = metaBatendo.getAttribute(Atributo.Tempo_Stun);
+                if(tempoStun > 60) {
+                    tempoStun = 60;
                 }
-            };
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, de, (int) tempoStun);
-        }
+                Cooldown.setMetaCooldown(batendo, "stunou", (int) tempoStun * 100);
+                Paralyze.paraliza(tomando);
+                batendo.sendMessage(ChatColor.GREEN + "Paralizou o alvo");
+                Runnable de = new Runnable() {
+                    public void run() {
+                        if (tomando == null) {
+                            return;
+                        }
 
+                        if (Paralyze.isParalizado(tomando)) {
+                            Paralyze.removeParalize(tomando);
+                        }
+                    }
+                };
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, de, (int) tempoStun);
+            }
+        }
     }
 
     /*
@@ -207,7 +212,7 @@ public class AtributeListener extends KomSystem {
     @EventHandler(priority = EventPriority.MONITOR)
     public void takeDamage(EntityDamageEvent ev) {
 
-        KoM.debug("Chegando dano " + ev.getDamage() + " em " + ev.getEntity().getName()+" na loc "+LocUtils.loc2str(ev.getEntity().getLocation()));
+        KoM.debug("Chegando dano " + ev.getDamage() + " em " + ev.getEntity().getName() + " na loc " + LocUtils.loc2str(ev.getEntity().getLocation()));
 
         if (ev.getEntity() instanceof LivingEntity) {
             LivingEntity e = (LivingEntity) ev.getEntity();
@@ -249,20 +254,7 @@ public class AtributeListener extends KomSystem {
                         return;
                     }
                 }
-                /*else if (ev.getCause() == DamageCause.WITHER) {
-                 double mult = equipTomou.getAttribute(Atributo.Resistencia_Wither);
-                 if (mult > 0) {
-                 mult = mult / 100;
-                 ev.setDamage(ev.getDamage() - (ev.getDamage() * mult));
-                 }
-                 } else if (ev.getCause() == DamageCause.POISON) {
-                 double mult = equipTomou.getAttribute(Atributo.Resistencia_Veneno);
-                 if (mult > 0) {
-                 mult = mult / 100;
-                 ev.setDamage(ev.getDamage() - (ev.getDamage() * mult));
-                 }
-                 }
-                 */
+
                 KoM.debug("Depois das resists: " + ev.getDamage());
 
                 //////////////////////////
@@ -279,8 +271,8 @@ public class AtributeListener extends KomSystem {
                             Player batendo = (Player) ev2.getDamager();
                             EquipMeta meta = EquipManager.getPlayerEquipmentMeta(batendo);
                             armorPenetration = meta.getAttribute(Atributo.Penetr_Armadura);
-                        } else if (ev2.getDamager().getType() == EntityType.ARROW) {
-                            Arrow a = (Arrow) ev2.getDamager();
+                        } else if (ev2.getDamager().getType() == EntityType.ARROW || ev2.getDamager().hasMetadata("bonka")) {
+                            Projectile a = (Projectile) ev2.getDamager();
                             if (a.getShooter() instanceof Player) {
                                 Player atirador = (Player) a.getShooter();
                                 EquipMeta meta = EquipManager.getPlayerEquipmentMeta(atirador);
@@ -290,7 +282,7 @@ public class AtributeListener extends KomSystem {
                     }
 
                     // resisting damage from ARMOR
-                    armor -= armorPenetration;
+                    armor -= armorPenetration / 1.5d;
                     if (armor < 0) {
                         armor = 0;
                     }

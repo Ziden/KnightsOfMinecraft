@@ -1,6 +1,6 @@
-package instamc.coders.libkom.comandos;
+package genericos.komzin.libzinha.comandos;
 
-import instamc.coders.libkom.InstaMCLibKom;
+import genericos.komzin.libzinha.InstaMCLibKom;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,6 +31,12 @@ public class ComandoG implements CommandExecutor {
                 p.sendMessage(ChatColor.GREEN + "Voce gastou " + custo + " " + moeda + " pelo chat global !");
                 InstaMCLibKom.economy.withdrawPlayer(p.getName(), custo);
             }
+            
+            if (p.hasMetadata("Silenciado")) {
+                p.sendMessage("§f[§4!§f]§8 Voce esta silenciado. Talves voce tenha falado algo inadequado no chat!");
+                return true;
+            }
+            
             String clan = "";
             String channel = "§7[g]";
             String prefixo = "";

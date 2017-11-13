@@ -125,9 +125,9 @@ public class Farmer extends KomSystem {
     public static void poisonaSlimeball(PlayerPickupItemEvent ev) {
 
         if (!ev.getPlayer().getWorld().getName().equalsIgnoreCase("dungeon") && Jobs.getJobLevel("Fazendeiro", ev.getPlayer()) != 1) {
-            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 300, 3));
-            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 300, 6));
-            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 0));
+            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 3));
+            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 3));
+            ev.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 0));
             PlayEffect.play(VisualEffect.SPELL_MOB, ev.getPlayer().getLocation(), "num:2");
             ev.getItem().remove();
             ev.getPlayer().sendMessage(ChatColor.AQUA + Menu.getSimbolo("Fazendeiro") + " " + ChatColor.RED + L.m("Voce foi envenenado por uma slimeball envenenada e está decompondo!"));

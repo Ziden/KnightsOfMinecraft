@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom.comandos;
+/*    */ package genericos.komzin.libzinha.comandos;
 /*    */ 
 /*    */ import org.bukkit.Material;
 /*    */ import org.bukkit.command.Command;

@@ -86,6 +86,7 @@ import nativelevel.Menu.Menu;
 import nativelevel.Menu.netMenu;
 import nativelevel.MetaShit;
 import nativelevel.Attributes.AttributeInfo;
+import nativelevel.Custom.Buildings.Construcao;
 import nativelevel.Equipment.Generator.EquipGenerator;
 import nativelevel.bencoes.TipoBless;
 import nativelevel.gemas.Raridade;
@@ -415,6 +416,11 @@ public class GeneralListener implements Listener {
             return;
         }
 
+        if(ev.getItem().getType().name().contains("MINECART")) {
+            ev.setCancelled(true);
+            return;
+        }
+        
         if (stack.getType() == Material.LAVA || stack.getType() == Material.LAVA_BUCKET) {
             ev.setCancelled(true);
         }
@@ -895,8 +901,12 @@ public class GeneralListener implements Listener {
         return false;
     }
 
+    private static boolean desativaRegen = false;
+    
     @EventHandler(priority = EventPriority.NORMAL)
     public void load(ChunkLoadEvent ev) {
+        if(desativaRegen)
+            return;
         KoM.generator.load(ev);
         if (ev.isNewChunk()) {
             ev.getChunk().getBlock(5, 0, 5).setType(gambiarra);
@@ -912,6 +922,9 @@ public class GeneralListener implements Listener {
                     return;
                 }
             }
+            
+            if(Construcao.chunkConstruido(ev.getChunk()))
+                    return;
 
             ev.getChunk().getBlock(5, 0, 5).setType(gambiarra);
             ev.getChunk().getBlock(5, 1, 5).setType(Material.BEDROCK);
@@ -919,12 +932,14 @@ public class GeneralListener implements Listener {
             if (type.equalsIgnoreCase("WILD")) {
                 //ClanLand.removeClanAt(ev.getChunk().getBlock(0, 0, 0).getLocation());
         
+                desativaRegen = true;
                 boolean guildaProxima = Terreno.temGuildaPerto(null, ev.getChunk().getBlock(0, 0, 0).getLocation());
+               
                 
                 if(!guildaProxima) {
                     ev.getChunk().getWorld().regenerateChunk(ev.getChunk().getX(), ev.getChunk().getZ());
                 }
-
+                desativaRegen = false;
                 ev.getChunk().getBlock(5, 0, 5).setType(gambiarra);
                 ev.getChunk().getBlock(5, 1, 5).setType(Material.BEDROCK);
             } else {
@@ -1028,17 +1043,13 @@ public class GeneralListener implements Listener {
                 xp *= 10;
                 money = 100;
                 ev.getItemList().add(EquipGenerator.gera(Raridade.Incomum, level));
-                ev.getItemList().add(EquipGenerator.gera(Raridade.Incomum, level));
-                ev.getItemList().add(EquipGenerator.gera(Raridade.Incomum, level));
+               // ev.getItemList().add(EquipGenerator.gera(Raridade.Incomum, level));
+               // ev.getItemList().add(EquipGenerator.gera(Raridade.Incomum, level));
                 ev.getItemList().add(EquipGenerator.gera(Raridade.Comum, level));
+               // ev.getItemList().add(EquipGenerator.gera(level));
+               // ev.getItemList().add(EquipGenerator.gera(level));
                 ev.getItemList().add(EquipGenerator.gera(level));
                 ev.getItemList().add(EquipGenerator.gera(level));
-                ev.getItemList().add(EquipGenerator.gera(level));
-                ev.getItemList().add(EquipGenerator.gera(level));
-                if (Jobs.rnd.nextBoolean()) {
-                    ev.getItemList().add(EquipGenerator.gera(Raridade.Raro, level));
-                }
-
             }
 
             if (ev.getPhatLoot().name.equalsIgnoreCase("lvl4")) {

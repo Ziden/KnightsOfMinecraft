@@ -12,10 +12,25 @@
  Patrocionio: InstaMC << MEU PAU DE OCULOS
 
 - FEITO
-- Arrumado bug do mercado.
-- Facilitado magos acertarem magias.
-- Em breve, novas magias/poções !
+- Adicionado cooldown no Grito do Lenhador
+- Nerfado stat Penetração de Armadura em 25%
+- Tempo de Stun Máximo Agora é 60 (mesmo se tiver mais de 60, o máximo será 60)
+- Adicionado um cooldown ao stun , ele é 2x o tempo da duração do stun.
+- Quando ladino atirar uma flecha invisivel, uma fumaça maior aparece pra ser mais facil ver de onde veio a flecha
+- Quando ladino atira uma flecha invisivel ele tem uma chance de 20% de ser revelado.
+- Nerfada XP do Alquimista
+- Paladinos, Ladinos e Magos ganham mais XP ao matar mobs !
+- Nerfado loots dos baús de dungeons no geral
+- Evitado dano de explosões na SafeZone
+- Arrumado bug da coleira do engenheiro. Nao vai mais aparecer a coleira (nao funciona mais nessa versão, preciso ver outra alternativa)
+- Arrumado bug onde era possível duplicar livros de receitas usando estantes
+- Arrumado bug onde o seguro com 0 cargas fazia com que o jogador dropasse tudo.
 
+
+
+fAZER:
+- arrumar items bugados sem checaMods
+- 
 
 STAFF:
  - adicionar luz da graça na loja (1 cash)
@@ -49,7 +64,11 @@ import nativelevel.sisteminhas.Deuses;
 import nativelevel.Listeners.GeneralListener;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import instamc.coders.libkom.InstaMCLibKom;
+import genericos.komzin.libzinha.InstaMCLibKom;
+import genericos.komzin.libzinha.comandos.ComandoChatbb;
+import genericos.komzin.libzinha.comandos.ComandoL;
+import genericos.komzin.libzinha.comandos.ComandoR;
+import genericos.komzin.libzinha.comandos.ComandoTell;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -232,7 +251,7 @@ import org.bukkit.util.Vector;
 public class KoM extends JavaPlugin {
 
     public static final String tag = "§7§l[§6§lK§e§lo§6§lM§7§l]";
-
+    public static String camila = "camila"; // S2
     public static boolean serverTestes = false;
     public static boolean debugMode = false;
     private GeneralListener eventos;
@@ -277,7 +296,7 @@ public class KoM extends JavaPlugin {
         }
     }
 
-    public static String camila = "2016camila55";
+   
 
     public static ItemStack addGlow(ItemStack item) {
         net.minecraft.server.v1_12_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
@@ -308,8 +327,6 @@ public class KoM extends JavaPlugin {
         SkillMaster.load();
         ENABLE_TIME = System.currentTimeMillis() / 1000;
         _instance = this;
-        komq = new KomQuista();
-        komq.onEnable();
         log = getLogger();
         String path = new File(".").getAbsolutePath();
         if (path.contains("testes")) {
@@ -336,12 +353,14 @@ public class KoM extends JavaPlugin {
                 config.getConfig().set("database.pass", "123batata");
             } else {
 
-                // camila = config.getConfig().getString("database.pass");
+                camila = config.getConfig().getString("database.pass");
             }
             config.SaveConfig();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        komq = new KomQuista();
+        komq.onEnable();
         worldEdit = (WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit");
         worldGuard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
         TipoBless.init();
@@ -390,7 +409,7 @@ public class KoM extends JavaPlugin {
             }
         };
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, r4, 20 * 60 * 60 * 2, 20 * 60 * 60 * 2);
-
+        
         // Bukkit.getScheduler().scheduleSyncRepeatingTask(this, r2, 20 * 60 * 30, 20 * 60 * 30);
         Runnable r3 = new Runnable() {
             @Override
@@ -454,6 +473,11 @@ public class KoM extends JavaPlugin {
         ajuda = new KomAjuda();
         ajuda.onEnable();
 
+        Bukkit.getPluginCommand("l").setExecutor(new ComandoL());
+        Bukkit.getPluginCommand("tell").setExecutor(new ComandoTell());
+        Bukkit.getPluginCommand("r").setExecutor(new ComandoR());
+        
+        Bukkit.getPluginCommand("chatbb").setExecutor(new ComandoChatbb());
         Bukkit.getPluginCommand("anuncio").setExecutor(new CmdAnuncio());
         Bukkit.getPluginCommand("like").setExecutor(new ComandoLike());
         Bukkit.getPluginCommand("dislike").setExecutor(new ComandoDislike());

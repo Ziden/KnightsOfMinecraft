@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom;
+/*    */ package genericos.komzin.libzinha;
 /*    */ 
 /*    */ import java.util.HashSet;
 /*    */ import org.bukkit.Location;
@@ -19,6 +19,12 @@
 /* 19 */   public HashSet<Location> MsgJaLida = new HashSet();
 /* 20 */   public long TempoFoguete = 0L;
 /* 21 */   public long TempoAnunciar = 0L;
+  public boolean ignoreTell = false;
+    public String inChannel = null;
+    public String lastPlayerMessage = null;
+    public String talkingTo = null;
+    public boolean recebelocal = true;
+    public boolean recebeglobal = true;
 /*    */ }
 
 

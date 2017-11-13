@@ -454,7 +454,11 @@ public class Thief extends KomSystem {
         }
 
         if (taInvisivel(p)) {
-            PlayEffect.play(VisualEffect.SMOKE, p.getLocation(), "");
+            if(Jobs.rnd.nextInt(5)==1) {
+                Thief.revela(p);
+            } else
+                PlayEffect.play(VisualEffect.SMOKE_LARGE, p.getLocation(), "");
+            //Thief.revela(p);
         }
 
         //AttributeInfo info = KnightsOfMania.database.getAtributos(p);

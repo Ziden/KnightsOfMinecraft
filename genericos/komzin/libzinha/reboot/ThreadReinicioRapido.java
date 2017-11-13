@@ -1,6 +1,6 @@
-package instamc.coders.libkom.reboot;
+package genericos.komzin.libzinha.reboot;
 
-import instamc.coders.libkom.utils.Utils;
+import genericos.komzin.libzinha.utils.Utils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nativelevel.KoM;

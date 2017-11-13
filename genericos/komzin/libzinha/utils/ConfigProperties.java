@@ -1,4 +1,4 @@
-/*    */ package instamc.coders.libkom.utils;
+/*    */ package genericos.komzin.libzinha.utils;
 /*    */ 
 /*    */ import java.io.File;
 /*    */ import java.io.FileInputStream;

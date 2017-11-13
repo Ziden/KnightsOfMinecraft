@@ -1,6 +1,6 @@
-/*    */ package instamc.coders.libkom.comandos;
+/*    */ package genericos.komzin.libzinha.comandos;
 /*    */ 
-/*    */ import instamc.coders.libkom.reboot.ThreadCmdFechar;
+/*    */ import genericos.komzin.libzinha.reboot.ThreadCmdFechar;
 /*    */ import org.bukkit.command.Command;
 /*    */ import org.bukkit.command.CommandExecutor;
 /*    */ import org.bukkit.command.CommandSender;
