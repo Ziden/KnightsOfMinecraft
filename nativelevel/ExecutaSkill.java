@@ -66,9 +66,10 @@ public class ExecutaSkill {
         if (ev.getEntity() instanceof Player) {
             Player p = (Player) ev.getEntity();
 
-            if(Thief.taInvisivel(p))
+            if (Thief.taInvisivel(p)) {
                 Thief.revela(p);
-            
+            }
+
             if (p.isBlocking()) { //if (p.getItemInHand().getType() == Material.SHIELD || p.getInventory().getItemInOffHand().getType() == Material.SHIELD) {
 
                 if (Jobs.getJobLevel(Jobs.Classe.Paladino, p) != Jobs.TipoClasse.PRIMARIA || !Mana.spendMana(p, 15)) {
@@ -134,6 +135,28 @@ public class ExecutaSkill {
                     if (cajadoElemental == null) {
                         cajadoElemental = "Nulo";
                     }
+                }
+            }
+            if (ev.getCause() == DamageCause.FIRE || ev.getCause() == DamageCause.FIRE_TICK) {
+                if (p.hasMetadata("dotfogo")) {
+                    long dot = (Long) MetaShit.getMetaObject("dotfogo", p);
+                    long agora = System.currentTimeMillis() / 1000;
+
+                    if (agora <= dot) {
+                        ev.setCancelled(true);
+                        return;
+                    }
+                }
+                MetaShit.setMetaObject("dotfogo", p, System.currentTimeMillis() / 1000);
+                ev.setCancelled(true);
+                double dano = ev.getDamage();
+                double vida = p.getHealth();
+                if (dano <= vida) {
+                    vida -= dano;
+                    p.setHealth(vida);
+                    p.playEffect(EntityEffect.HURT);
+                } else {
+                    p.setHealth(0);
                 }
             }
             if (ev.getCause() == DamageCause.POISON || ev.getCause() == DamageCause.WITHER) {
@@ -250,7 +273,7 @@ public class ExecutaSkill {
             if (event.isCancelled()) {
                 return;
             }
-            
+
             double ratioNivel = 1 + (attacker.getLevel() / 100d) / 2d;
             event.setDamage(event.getDamage() * ratioNivel);
 
@@ -287,8 +310,9 @@ public class ExecutaSkill {
             }
 
             if (event.getEntity() instanceof Creature && attacker.getItemInHand() != null && attacker.getItemInHand().getType() == Material.EGG) {
-                if(Farmer.transformaEmOvO(attacker, event.getEntity()))
+                if (Farmer.transformaEmOvO(attacker, event.getEntity())) {
                     event.setCancelled(true);
+                }
                 return;
             }
             // player bate em player
@@ -526,8 +550,6 @@ public class ExecutaSkill {
                 } else {
 
                     // BONUS DE DANO DO NIVEL
-
-
                     KoM.debug("Dano passando com ratio " + ratioNivel + " ficando " + event.getDamage());
 
                     // bonus de força no dano
