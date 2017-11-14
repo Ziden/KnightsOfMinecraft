@@ -9,6 +9,7 @@ import nativelevel.Custom.CustomItem;
 import nativelevel.Custom.Items.PotionExtract;
 import nativelevel.Lang.L;
 import nativelevel.Custom.CustomPotion;
+import nativelevel.KoM;
 import nativelevel.sisteminhas.KomSystem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -29,10 +30,12 @@ public class BrewingStandEvents extends KomSystem {
 
     @EventHandler
     public void brew(BrewEvent ev) {
+
         ev.setCancelled(true);
 
         BrewerInventory inv = ev.getContents();
         ItemStack ingredient = inv.getIngredient();
+        ItemStack fuel = inv.getFuel();
 
         for (int x = 0; x < inv.getContents().length; x++) {
             ItemStack brewing = inv.getContents()[x];
@@ -41,11 +44,21 @@ public class BrewingStandEvents extends KomSystem {
             }
 
             CustomItem custom = CustomItem.getItem(brewing);
-            if(custom==null || !(custom instanceof PotionExtract)) {
+            if (custom == null || !(custom instanceof PotionExtract)) {
+
+                // n mexe se for ingred
+                if (brewing == ingredient) {
+                    continue;
+                }
+
+                if (fuel != null && brewing.getType() == fuel.getType()) {
+                    continue;
+                }
+
                 inv.setItem(x, new ItemStack(Material.GLASS_BOTTLE, 1));
-                return;
+                continue;
             }
-            
+
             PotionExtract extract = (PotionExtract) CustomItem.getItem(brewing);
             CustomPotion result = extract.getPotionFromExtract(brewing);
             ItemStack neededToBrew = result.brewWith();
@@ -54,13 +67,26 @@ public class BrewingStandEvents extends KomSystem {
             } else {
                 inv.setItem(x, result.generateItem(1));
             }
-
         }
+
         if (ingredient.getAmount() > 1) {
             ingredient.setAmount(ingredient.getAmount() - 1);
+            ev.getContents().setIngredient(ingredient);
         } else {
             ev.getContents().setIngredient(null);
         }
+
+        KoM.debug("FUEL LEVEL: "+ev.getFuelLevel());
+        
+        if (ev.getFuelLevel()==0 && fuel != null && fuel.getType() != Material.AIR) {
+            if (fuel.getAmount() > 1) {
+                fuel.setAmount(fuel.getAmount() - 1);
+                ev.getContents().setFuel(fuel);
+            } else {
+                ev.getContents().setFuel(null);
+            }
+        }
+
     }
 
     @EventHandler
