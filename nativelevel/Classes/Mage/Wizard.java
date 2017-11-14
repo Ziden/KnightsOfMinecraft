@@ -24,6 +24,7 @@ import me.fromgate.playeffect.VisualEffect;
 import nativelevel.sisteminhas.ClanLand;
 import nativelevel.Custom.CustomItem;
 import nativelevel.Custom.Items.CajadoElemental;
+import org.bukkit.block.EnchantingTable;
 import nativelevel.Jobs;
 import nativelevel.KoM;
 import nativelevel.Lang.L;
@@ -53,6 +54,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -218,7 +220,7 @@ public class Wizard {
         en = Enchantment.PROTECTION_ENVIRONMENTAL;
         if (event.getEnchantsToAdd().containsKey(en)) {
             int lvl = event.getEnchantsToAdd().get(en);
-            lvl = lvl - 2;
+            lvl = lvl - 1;
             if (lvl <= 0) {
                 event.getEnchantsToAdd().remove(en);
             } else {
@@ -229,7 +231,7 @@ public class Wizard {
         en = Enchantment.PROTECTION_PROJECTILE;
         if (event.getEnchantsToAdd().containsKey(en)) {
             int lvl = event.getEnchantsToAdd().get(en);
-            lvl = lvl - 2;
+            lvl = lvl - 1;
             if (lvl <= 0) {
                 event.getEnchantsToAdd().remove(en);
             } else {
@@ -254,7 +256,7 @@ public class Wizard {
 
         if (inv.getSecondary() == null || inv.getSecondary().getAmount() < event.getExpLevelCost()) {
             event.getEnchanter().sendMessage(ChatColor.AQUA + Menu.getSimbolo("Mago") + " " + ChatColor.GOLD + "Voce precisa colocar mais lapiz lazuli na mesa para encantar items !");
-            event.getEnchantsToAdd().clear();
+            //event.getEnchantsToAdd().clear();
             event.setCancelled(true);
             return;
         }
@@ -263,16 +265,16 @@ public class Wizard {
             KoM.removeInventoryItems(event.getEnchanter().getInventory(), Material.GLOWSTONE, preco);
         } else {
             event.getEnchanter().sendMessage(ChatColor.AQUA + Menu.getSimbolo("Mago") + " " + ChatColor.GOLD + "Voce precisa de glowstone para encantar items !");
-            event.getEnchantsToAdd().clear();
+            //event.getEnchantsToAdd().clear();
             event.setCancelled(true);
             return;
         }
 
-        int dificuldade = 110;
-        if (event.getExpLevelCost() < 4) {
+        int dificuldade = 120;
+        if (event.getExpLevelCost() < 3) {
             dificuldade = 75;
         } else if (event.getExpLevelCost() < 9) {
-            dificuldade = 95;
+            dificuldade = 100;
         }
 
         int xp = event.getExpLevelCost();
@@ -299,26 +301,30 @@ public class Wizard {
          */
         Player p = event.getEnchanter();
 
-        //// GAMBETA PRA ARRUMAR BUG DE NAO MUDAR ENCANTAMENTO NA MESA /////
-        //EntityPlayer player = ((CraftPlayer) p).getHandle();
-        //ContainerEnchantTable enchant = (ContainerEnchantTable) player.activeContainer;
-        //player.enchantDone(0);
-        //player.b(StatisticList.W);
-        //enchant.f = player.cj();
-        //enchant.enchantSlots.update();
-        //enchant.a(enchant.enchantSlots);
         event.setExpLevelCost(0);
 
         int sucesso = Jobs.hasSuccess(dificuldade, "Mago", p);
         if (sucesso == Jobs.success) {
             // int jobLevel = Jobs.getJobLevel("Mago", p);
             // if (jobLevel == 0) {
-            event.setCancelled(true);
+            
+            EnchantingTable table = (EnchantingTable)event.getEnchantBlock().getState();
+            
+            //event.setCancelled(true);
+            
+            if(event.getEnchantsToAdd().size()==0) {
+                event.getEnchantsToAdd().put(Enchantment.DURABILITY, 1);
+                KoM.debug("Nao tinha enchants");
+            }
+            
+            /*
             for (Enchantment e : event.getEnchantsToAdd().keySet()) {
                 int level = event.getEnchantsToAdd().get(e);
                 event.getItem().addEnchantment(e, level);
             }
             event.getEnchantsToAdd().clear();
+            */
+            
             GeneralListener.givePlayerExperience(xp, p);
             ItemMeta meta = event.getItem().getItemMeta();
             List<String> lore = meta.getLore();
@@ -350,6 +356,17 @@ public class Wizard {
             p.sendMessage(ChatColor.GOLD + L.m("Voce falhou ao tentar encantar o item e acabou transformando o item em polvora !"));
             p.closeInventory();
         }
+        
+        EntityPlayer player = ((CraftPlayer) p).getHandle();
+        ContainerEnchantTable enchant = (ContainerEnchantTable) player.activeContainer;
+        //player.enchantDone(0);
+       
+        player.enchantDone(CraftItemStack.asNMSCopy(event.getItem()), 0);
+        player.b(StatisticList.W);
+        //player.b(StatisticList.W);
+        enchant.f = player.cL();
+        enchant.enchantSlots.update();
+        enchant.a(enchant.enchantSlots);
     }
 
     public static void soltaRaio(Player p) {
