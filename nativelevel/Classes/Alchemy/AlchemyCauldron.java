@@ -18,6 +18,7 @@ import nativelevel.KoM;
 import nativelevel.Lang.L;
 import nativelevel.MetaShit;
 import nativelevel.Custom.CustomPotion;
+import nativelevel.Custom.PotionLoader;
 import nativelevel.Jobs.TipoClasse;
 import nativelevel.sisteminhas.KomSystem;
 import nativelevel.RecipeBooks.BookTypes;
@@ -58,6 +59,17 @@ public class AlchemyCauldron extends KomSystem {
     public static HashSet<Item> flutuando = new HashSet<Item>();
     public static HashMap<String, List<Item>> quemFlutua = new HashMap<String, List<Item>>();
 
+    public HashSet<Material> reagentes = new HashSet<Material>();
+    
+    @Override
+    public void onEnable() {
+        for(CustomPotion pot : PotionLoader.customItems.values()) {
+            for(ItemStack ss : pot.getRecipe()) {
+                reagentes.add(ss.getType());
+            }
+        }
+    }
+    
     @EventHandler
     public void itemSome(ItemDespawnEvent ev) {
         if (flutuando.contains(ev.getEntity())) {
@@ -205,6 +217,8 @@ public class AlchemyCauldron extends KomSystem {
                 ev.getPlayer().sendMessage("§e§l[Dica] §aVocê pode usar um funil para retirar ingredientes do caldeirão.");
                 MetaShit.setMetaObject("funilz", ev.getPlayer(), true);
             }
+            
+            
 
             int waterLevel = ev.getClickedBlock().getData();
             List<ItemStack> ingredientsIn = new ArrayList<ItemStack>();
@@ -233,6 +247,11 @@ public class AlchemyCauldron extends KomSystem {
                     cauld.removeMetadata("ingredients", KoM._instance);
                     AlchemyCauldron.clearItems(cauld);
                     cauld.setData((byte) 0);
+                    return;
+                }
+                
+                if(!reagentes.contains(inHand.getType())) {
+                    ev.getPlayer().sendMessage(ChatColor.RED+"Voce não pode colocar isso no caldeirão.");
                     return;
                 }
 
