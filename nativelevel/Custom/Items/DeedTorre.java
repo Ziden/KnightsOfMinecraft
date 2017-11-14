@@ -52,6 +52,9 @@ public class DeedTorre extends CustomItem {
         
         onde.setX(onde.getX()-2);
         onde.setZ(onde.getZ()-2);
+        
+        KoM.debug("Construindo torre em "+onde.toString());
+        
         if (!torre.podeConstruir(onde)) {
             player.sendMessage(ChatColor.RED +L.m( "Voce nao pode construir isto aqui !"));
             return false;

@@ -39,9 +39,9 @@ public abstract class Construcao {
     
     public static void save(Location inicio, Vector tamanho) {
         Chunk l1 = inicio.getChunk();
-        Chunk l2 = inicio.add(tamanho).getChunk();
-        Chunk l3 = inicio.add(tamanho.getX(), 0, 0).getChunk();
-        Chunk l4 = inicio.add(0, 0, tamanho.getZ()).getChunk();
+        Chunk l2 = inicio.clone().add(tamanho).getChunk();
+        Chunk l3 = inicio.clone().add(tamanho.getX(), 0, 0).getChunk();
+        Chunk l4 = inicio.clone().add(0, 0, tamanho.getZ()).getChunk();
         construido.add(l1);
         construido.add(l2);
         construido.add(l3);
@@ -50,9 +50,9 @@ public abstract class Construcao {
 
     public static void destroi(Location inicio, Vector tamanho) {
         Chunk l1 = inicio.getChunk();
-        Chunk l2 = inicio.add(tamanho).getChunk();
-        Chunk l3 = inicio.add(tamanho.getX(), 0, 0).getChunk();
-        Chunk l4 = inicio.add(0, 0, tamanho.getZ()).getChunk();
+        Chunk l2 = inicio.clone().add(tamanho).getChunk();
+        Chunk l3 = inicio.clone().add(tamanho.getX(), 0, 0).getChunk();
+        Chunk l4 = inicio.clone().add(0, 0, tamanho.getZ()).getChunk();
         construido.remove(l1);
         construido.remove(l2);
         construido.remove(l3);
