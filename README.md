@@ -11,3 +11,7 @@ Se quiser extrair alguma coisa, sinta-se a vontade, o código ta no git público
 Sabe Java e gostaria de ajudar o servidor ?
 
 Entre em contato por skype: ziden66
+
+https://www.facebook.com/KnightsOfMinecraft
+
+www.knightsofminecraft.com
