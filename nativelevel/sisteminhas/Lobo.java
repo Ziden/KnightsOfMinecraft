@@ -10,6 +10,7 @@ import java.util.List;
 import me.fromgate.playeffect.PlayEffect;
 import me.fromgate.playeffect.VisualEffect;
 import nativelevel.Jobs;
+import nativelevel.Jobs.TipoClasse;
 import nativelevel.KoM;
 import nativelevel.MetaShit;
 import net.md_5.bungee.api.ChatColor;
@@ -38,7 +39,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Lobo implements CommandExecutor {
     
     public static void interactOsso(PlayerInteractEvent ev) {
-        if (ev.getPlayer().getItemInHand() != null && ev.getPlayer().getItemInHand().getType() == Material.BONE) {
+        if (Jobs.getJobLevel(Jobs.Classe.Fazendeiro, ev.getPlayer())==TipoClasse.PRIMARIA && ev.getPlayer().getItemInHand() != null && ev.getPlayer().getItemInHand().getType() == Material.BONE) {
             ItemMeta meta = ev.getPlayer().getItemInHand().getItemMeta();
             if (meta.getLore() == null || meta.getLore().size() == 0) {
                 if (ev.getPlayer().hasMetadata("Lobo")) {

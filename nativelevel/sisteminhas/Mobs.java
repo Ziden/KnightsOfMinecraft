@@ -495,7 +495,6 @@ public class Mobs extends KomSystem {
             ev.setCancelled(true);
             KoM.debug("Batendo com .damage");
         }
-
     }
 
     public static void morreMob(EntityDeathEvent ev) {
