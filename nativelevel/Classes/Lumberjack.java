@@ -206,7 +206,7 @@ public class Lumberjack {
             }
 
             PlayEffect.play(VisualEffect.SMOKE_LARGE, ev.getPlayer().getLocation(), "num:1");
-            Vector jumpDir = ev.getPlayer().getLocation().getDirection().normalize().multiply(4);
+            Vector jumpDir = ev.getPlayer().getLocation().getDirection().normalize().multiply(3);
             jumpDir.divide(new Vector(1, 5, 1));
             jumpDir.setY(0.6D);
 
