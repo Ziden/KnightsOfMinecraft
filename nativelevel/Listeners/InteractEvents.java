@@ -104,7 +104,15 @@ public class InteractEvents implements Listener {
         KoM.debug("interage low inicio");
 
         if (ev.getRightClicked() != null && ev.getRightClicked().getType() == EntityType.MINECART_HOPPER) {
-
+            ev.setCancelled(true);
+        }
+        
+        if(ev.getRightClicked() != null && ev.getRightClicked().getType()==EntityType.ARMOR_STAND) {
+            if(!ev.getPlayer().isOp() && WorldGuardKom.ehSafeZone(ev.getRightClicked().getLocation())) {
+                ev.getPlayer().sendMessage(ChatColor.RED+"Voce nao pode fazer isto aqui");
+                ev.setCancelled(true);
+                return;
+            }
         }
 
         if (ev.getPlayer().getItemInHand() != null && (ev.getPlayer().getItemInHand().getType() == Material.WATER_BUCKET || ev.getPlayer().getItemInHand().getType() == Material.LAVA_BUCKET)) {
@@ -214,6 +222,14 @@ public class InteractEvents implements Listener {
 
         if (ev.getItem() != null && (ev.getItem().getType() == Material.MONSTER_EGG || ev.getItem().getType() == Material.MONSTER_EGGS)) {
             Farmer.handleEgg(ev);
+        }
+        
+        if(ev.getClickedBlock() != null && ev.getItem() != null && ev.getItem().getType()==Material.ARMOR_STAND) {
+            if(!ev.getPlayer().isOp() && WorldGuardKom.ehSafeZone(ev.getClickedBlock().getLocation())) {
+                ev.getPlayer().sendMessage(ChatColor.RED+"Voce nao pode usar isto aqui");
+                ev.setCancelled(true);
+                return;
+            }
         }
 
         Aura.interage(ev);
