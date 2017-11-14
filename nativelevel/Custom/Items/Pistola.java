@@ -60,6 +60,11 @@ public class Pistola extends CustomItem {
             return false;
         }
 
+        if(player.getInventory().getItemInOffHand() != null && player.getInventory().getItemInOffHand().getType()!=Material.AIR) {
+            player.sendMessage(ChatColor.RED+"Voce precisa das outra mão livre para conseguir mirar e atirar com a Bonka.");
+            return false;
+        }
+        
         if (!player.hasPotionEffect(PotionEffectType.SLOW)) {
 
             if (!player.getInventory().contains(Material.SULPHUR)) {
