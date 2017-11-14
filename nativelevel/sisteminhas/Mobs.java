@@ -499,6 +499,10 @@ public class Mobs extends KomSystem {
     }
 
     public static void morreMob(EntityDeathEvent ev) {
+        
+        for(PotionEffect ef : ev.getEntity().getActivePotionEffects())
+            ev.getEntity().removePotionEffect(ef.getType());
+        
         if (KoM.mm.getMobManager().isActiveMob(ev.getEntity().getUniqueId())) {
 
             Optional<ActiveMob> omob = KoM.mm.getMobManager().getActiveMob(ev.getEntity().getUniqueId());
