@@ -338,14 +338,21 @@ public class Lumberjack {
     */
 
     public static void tentaMachadadaEpica(Player tomou, Player bateu, EntityDamageEvent ev) {
-        int multiplicador = 8;
+        int multiplicador = 7;
+        
         if (Thief.taInvisivel(bateu)) {
             multiplicador = 4;
         }
+        
         if (ev.getDamage() == 0) {
             return;
         }
+        
         ev.setDamage(ev.getDamage() * multiplicador);
+        
+        if(ev.getDamage() > 66.6)
+            ev.setDamage(66.6);
+        
         if (ev.getEntity() instanceof Player) {
             PlayEffect.play(VisualEffect.FIREWORKS_SPARK, ev.getEntity().getLocation(), "type:ball color:yellow");
             tomou.sendMessage(ChatColor.RED + bateu.getName() + " te acertou uma machadada epica !");

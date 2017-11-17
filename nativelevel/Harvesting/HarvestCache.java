@@ -89,8 +89,7 @@ public class HarvestCache {
 
     static {
         translations.put(Material.CROPS, Material.WHEAT);
-        translations.put(Material.BEETROOT_BLOCK, Material.BEETROOT_SEEDS);
-        
+        translations.put(Material.BEETROOT_BLOCK, Material.BEETROOT_SEEDS);    
     }
     
     public static List<Material> ignora = Arrays.asList(new Material[]{});
