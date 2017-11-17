@@ -697,7 +697,11 @@ public class InteractEvents implements Listener {
                                 if (KoM.debugMode && ev.getPlayer().isOp()) {
                                     ev.getPlayer().sendMessage(L.m("achei uma possivel chave"));
                                 }
+                                
                                 ItemStack chave = ev.getItem();
+                                if(chave==null)
+                                    continue;
+
                                 ItemMeta minha = chave.getItemMeta();
                                 ItemMeta porta = i.getItemMeta();
                                 // eu to com uma chave na mao ?
