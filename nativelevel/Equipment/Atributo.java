@@ -37,6 +37,8 @@ public enum Atributo {
     Mana(false, 5, 50), //
     
     Stamina(false, 5, 50), //
+    
+    Magia(true, 1, 20),//
 
     Dano_Distancia(true, 1, 20);
 

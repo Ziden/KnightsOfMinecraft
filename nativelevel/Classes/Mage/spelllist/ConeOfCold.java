@@ -14,6 +14,8 @@ import nativelevel.Listeners.GeneralListener;
 import nativelevel.Classes.Mage.Elements;
 import nativelevel.Classes.Mage.MageSpell;
 import nativelevel.Classes.Mage.SpellParticleEffects;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
 import nativelevel.MetaShit;
 import nativelevel.efeitos.ParticleEffect;
 import nativelevel.integration.SimpleClanKom;
@@ -49,6 +51,7 @@ public class ConeOfCold extends MageSpell {
 
     @Override
     public void cast(Player p) {
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
         List<Vector> blocos = Tralhas.getPositionsInCone(p.getLocation().toVector(), 5, 45, p.getLocation().getDirection());
         // Location loc = null;
         ClanPlayer eu = ClanLand.manager.getClanPlayer(p);
@@ -70,7 +73,7 @@ public class ConeOfCold extends MageSpell {
                 ((LivingEntity)e).addPotionEffect(efeito);
                 Vector ve = e.getLocation().toVector();
                 Vector v = ve.subtract(p.getLocation().toVector()).normalize();
-                v.setY(0.32);
+                v.setY(0.32 * (1+magia/100/2));
                 e.setVelocity(v);
             }
         }

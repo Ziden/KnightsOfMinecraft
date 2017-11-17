@@ -9,6 +9,8 @@ import me.fromgate.playeffect.PlayEffect;
 import me.fromgate.playeffect.VisualEffect;
 import nativelevel.Classes.Mage.Elements;
 import nativelevel.Classes.Mage.MageSpell;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
 import nativelevel.MetaShit;
 import nativelevel.spec.PlayerSpec;
 import org.bukkit.entity.Fireball;
@@ -25,14 +27,13 @@ public class Firebola extends MageSpell {
         super("Bola de Fogo");
     }
 
-    private final double MOD_DANO = 1;
-
     @Override
     public void cast(Player p) {
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
         SmallFireball fb = null;
         fb = p.launchProjectile(SmallFireball.class);
         fb.getVelocity().multiply(3);
-        double ratio = MOD_DANO;
+        double ratio = 1 + (magia/100);
         if (PlayerSpec.temSpec(p, PlayerSpec.Sacerdote)) {
             ratio *= 0.7;
         }

@@ -10,8 +10,12 @@ import me.fromgate.playeffect.VisualEffect;
 import nativelevel.Listeners.GeneralListener;
 import nativelevel.Classes.Mage.Elements;
 import nativelevel.Classes.Mage.MageSpell;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
+import nativelevel.KoM;
 import nativelevel.MetaShit;
 import nativelevel.spec.PlayerSpec;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
@@ -21,7 +25,7 @@ import org.bukkit.potion.PotionEffectType;
 /**
  *
  * @author User
- * 
+ *
  */
 public class Disperse extends MageSpell {
 
@@ -29,17 +33,19 @@ public class Disperse extends MageSpell {
         super("Dispersão Astral"); // pensando
     }
 
-    PotionEffect ef1 = new PotionEffect(PotionEffectType.ABSORPTION, 20*3, 1);
-    PotionEffect ef2 = new PotionEffect(PotionEffectType.BLINDNESS, 20*3, 1);
-    PotionEffect ef3 = new PotionEffect(PotionEffectType.INVISIBILITY, 20*3, 1);
-    PotionEffect ef4 = new PotionEffect(PotionEffectType.SPEED, 20*3, 1);
-    
     @Override
     public void cast(Player p) {
-       p.addPotionEffect(ef1);
-       p.addPotionEffect(ef2);
-       p.addPotionEffect(ef3);
-       p.addPotionEffect(ef4);
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
+        PotionEffect ef1 = new PotionEffect(PotionEffectType.ABSORPTION, (int) (20 * 3 * (1 + magia / 100 / 2d)), (int) (1 + ((magia / 10d))));
+        PotionEffect ef2 = new PotionEffect(PotionEffectType.BLINDNESS, (int) (20 * 3 * (1 + magia / 100 / 2d)), 1);
+        PotionEffect ef3 = new PotionEffect(PotionEffectType.INVISIBILITY, (int) (20 * 3 * (1 + magia / 100 / 2d)), 1);
+        PotionEffect ef4 = new PotionEffect(PotionEffectType.SPEED, (int) (20 * 3 * (1 + magia / 100 / 2d)), 1);
+        p.addPotionEffect(ef1);
+        p.addPotionEffect(ef2);
+        p.addPotionEffect(ef3);
+        p.addPotionEffect(ef4);
+        p.sendMessage(ChatColor.GREEN + "Voce sente seu corpo esvanecendo");
+        KoM.act(p, "esvaneceu");
     }
 
     @Override
@@ -64,7 +70,7 @@ public class Disperse extends MageSpell {
 
     @Override
     public int getCooldownInSeconds() {
-        return 1;
+        return 15;
     }
 
 }

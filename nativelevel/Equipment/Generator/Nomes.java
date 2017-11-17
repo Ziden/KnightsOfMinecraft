@@ -57,6 +57,10 @@ public class Nomes {
         
         prefixo.add(new Mod(new String[]{"Continuador", "Continuador", "Perseverador"}, Atributo.Regen_Stamina));
         sufixo.add(new Mod(new String[]{"da Força de Vontade", "da Força de Vontade", "da Força de Vontade"}, Atributo.Regen_Stamina));
+
+        prefixo.add(new Mod(new String[]{"Magico", "Arcano", "Cabalistico"}, Atributo.Magia));
+        sufixo.add(new Mod(new String[]{"da Magia", "do Elementalismo", "do Arcano"}, Atributo.Magia));
+
     }
 
     public static Mod getMod(Atributo a, Set<Mod> lista) {

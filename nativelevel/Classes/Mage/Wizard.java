@@ -34,6 +34,10 @@ import nativelevel.MetaShit;
 import nativelevel.Attributes.AttributeInfo;
 import nativelevel.Attributes.Mana;
 import nativelevel.Classes.Thief;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
+import nativelevel.Equipment.EquipMeta;
+import nativelevel.Equipment.ItemAttributes;
 import nativelevel.bencoes.TipoBless;
 import nativelevel.integration.SimpleClanKom;
 import nativelevel.integration.WG;
@@ -117,7 +121,9 @@ public class Wizard {
             return;
         }
 
-        int distance = 8 + (p.getLevel() / 10);
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
+        
+        int distance = (int)Math.round(8 + (p.getLevel() / 10) * (1+magia/100/2));
         HashSet<Material> m = null;
         Block b = p.getTargetBlock(m, 12);
         if (b == null) {
@@ -152,7 +158,7 @@ public class Wizard {
             return;
         }
         ClanPlayer cp = ClanLand.manager.getAnyClanPlayer(p.getUniqueId());
-
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
         int area = 2 + intel / 30;
         if (PlayerSpec.temSpec(p, PlayerSpec.Sacerdote)) {
             area += 4;
@@ -436,6 +442,8 @@ public class Wizard {
                                 }
                             }
                             double damage = 6D;
+                            double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
+                            damage *= 1+(magia/100);
                             if (PlayerSpec.temSpec(p, PlayerSpec.Sabio)) {
                                 damage *= 1.3;
                             } else if (PlayerSpec.temSpec(p, PlayerSpec.Sacerdote)) {
@@ -503,6 +511,7 @@ public class Wizard {
             p.sendMessage(ChatColor.RED + L.m("Esta magia parece nao funcionar aqui !"));
             return;
         }
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
         //fireImmunity.add(p);
         //new FirenovaAnimation(p);
         p.sendMessage(ChatColor.GREEN + "Voce emite um calor intenso");
@@ -514,7 +523,7 @@ public class Wizard {
                     continue;
                 }
             }
-            e.setFireTicks(20 * 5);
+            e.setFireTicks((int)Math.round(20 * 5 * (1+magia/100/2)));
             PlayEffect.play(VisualEffect.LAVA, e.getLocation(), "num:10");
             if (e.getType() == EntityType.PLAYER) {
                 ((Player) e).sendMessage(ChatColor.RED + p.getName() + " fez seu corpo arder em chamas");

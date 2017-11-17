@@ -7,6 +7,8 @@ package nativelevel.Classes.Mage.spelllist;
 
 import nativelevel.Classes.Mage.Elements;
 import nativelevel.Classes.Mage.MageSpell;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
 import nativelevel.MetaShit;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
@@ -20,16 +22,15 @@ public class FireBomba extends MageSpell {
     public FireBomba() {
         super("Bomba de Fogo");
     }
-
-    private final double MOD_DANO = 1;
     
     @Override
     public void cast(Player p) {
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
         Fireball fb = null;
         fb = p.launchProjectile(Fireball.class);
         fb.getVelocity().multiply(2);
         fb.setIsIncendiary(false);
-        MetaShit.setMetaObject("modDano", fb, MOD_DANO);
+        MetaShit.setMetaObject("modDano", fb, 1 + (magia/100));
     }
 
     @Override

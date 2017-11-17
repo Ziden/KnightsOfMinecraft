@@ -7,6 +7,8 @@ import nativelevel.Lang.L;
 import nativelevel.Listeners.GeneralListener;
 import nativelevel.Classes.Mage.Elements;
 import nativelevel.Classes.Mage.MageSpell;
+import nativelevel.Equipment.Atributo;
+import nativelevel.Equipment.EquipManager;
 import nativelevel.MetaShit;
 import nativelevel.spec.PlayerSpec;
 import org.bukkit.Bukkit;
@@ -28,7 +30,9 @@ public class Reflect extends MageSpell {
 
     @Override
     public void cast(final Player p) {
-        p.sendMessage(ChatColor.GREEN + L.m("Voce se protegeu com um escudo reflexor por 6 segundos"));
+        double magia = EquipManager.getPlayerAttribute(Atributo.Magia, p);
+        int segundos = (int)Math.round(5 + (magia/100));
+        p.sendMessage(ChatColor.GREEN + L.m("Voce se protegeu com um escudo reflexor por "+segundos+" segundos"));
         MetaShit.setMetaString("shield", p, "1");
         Runnable r = new Runnable() {
 
@@ -39,7 +43,7 @@ public class Reflect extends MageSpell {
                 }
             }
         };
-        Bukkit.getScheduler().scheduleSyncDelayedTask(KoM._instance, r, 20 * 6);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(KoM._instance, r, 20 * segundos);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class Reflect extends MageSpell {
 
     @Override
     public int getCooldownInSeconds() {
-        return 1;
+        return 6;
     }
 
 }
